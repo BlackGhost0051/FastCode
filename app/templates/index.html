@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1 id="app_name">Fast Code</h1>
+    
+    
+    <ul id="languages_block">
+        <li>
+            
+            <a href="/python">
+                <img src="{{ url_for('static', filename='languages/python/logo.png') }}"/>
+                Python</a>
+        </li>
+        
+        <li>
+            <a href="/java">
+                <img src="{{ url_for('static', filename='languages/java/logo.png') }}"/>
+                Java</a>
+        </li>
+    </ul>
+</body>
+</html>

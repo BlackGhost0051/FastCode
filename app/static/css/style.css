@@ -1,0 +1,43 @@
+body{
+    background: rgb(172, 213, 255);
+}
+
+#app_name{
+    margin: 2ex;
+    padding: 1ex;
+    background: black;
+    color: aliceblue;
+    width: 10ex;
+}
+
+#languages_block{
+    margin: 0ex 10ex 0ex 10ex;
+    
+    text-align: center;
+    justify-content: center;
+    align-items: center;    
+
+    display: flex;
+    padding: 5ex;
+    background: aqua;
+}
+
+li{
+    height: 15ex;
+    width: 15ex;
+    list-style: none;
+    background: white;   
+    border: solid 0.2ex black;
+}
+
+li a{
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+li a img {
+    height: 10ex;
+    width: 10ex;
+    padding: 0.5ex;
+}
