@@ -10,9 +10,11 @@ FastCode/
 │   ├── static/
 │   │   ├── css/             # CSS files
 │   │   │   └── style.css
+│   │   ├── images/
 │   │   ├── js/              # JavaScript files
 │   │       └── script.js
 │   ├── templates/           # HTML files
+│   │   ├── languages/
 │   │   ├── index.html
 │   └── database.db          # SQLite database file
 ├── .env                     # Environment variables (e.g., Flask secret key)
