@@ -1,5 +1,5 @@
 import os
-from flask import render_template, current_app
+from flask import render_template, current_app, jsonify
 
 @current_app.route('/')
 def home():
@@ -12,7 +12,7 @@ def python():
 def python_list():
     python_folder = os.path.join(current_app.root_path + '/static/languages/python')
     files = os.listdir(python_folder)
-    return str(files)
+    return jsonify(files)
 
 @current_app.route('/java')
 def java():
