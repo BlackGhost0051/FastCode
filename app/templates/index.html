@@ -6,7 +6,11 @@
 </head>
 <body>
     <h1 id="app_name">Fast Code</h1>
-    
+
+    <form action="{{ url_for('edd_file') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".py, .java, .cpp, .c, .js">
+        <input type="submit" value="Upload">
+    </form>
     
     <ul id="languages_block">
         <li>
