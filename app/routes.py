@@ -19,26 +19,28 @@ def python():
 def java():
     return  render_template('/languages/java/main.html')
 
-@current_app.route('/add_file', methods=['GET', 'POST'])
+@current_app.route('/add_file', methods=['POST'])
 def edd_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file.filename == '':
-            return "No selected file", 400
+    file = request.files['file']
+    if file.filename == '':
+        return "No selected file", 400
 
-        file_extension = os.path.splitext(file.filename)[1]
-        file_path = os.path.join(current_app.root_path, 'static', 'languages', EXTENSIONS_PATH[file_extension], file.filename)
+    file_extension = os.path.splitext(file.filename)[1]
+    file_path = os.path.join(current_app.root_path, 'static', 'languages', EXTENSIONS_PATH[file_extension], file.filename)
 
-        if os.path.exists(file_path):
-            return "File name is exist", 400
-        else:
-            try:
-                file.save(file_path)
-                return f"File saved at {file_path}", 200
-            except Exception as e:
-                return f"Error: {str(e)}", 500
+    if os.path.exists(file_path):
+        return "File name is exist", 400
+    else:
+        try:
+            file.save(file_path)
+            return f"File saved at {file_path}", 200
+        except Exception as e:
+            return f"Error: {str(e)}", 500
 
-    return "", 500
+
+@current_app.route('/remove_file', methods=['POST'])
+def remove_file():
+    return ""
 
 @current_app.route('/<language>/list')
 def send_list(language):
