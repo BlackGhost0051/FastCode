@@ -38,8 +38,10 @@ def edd_file():
             return f"Error: {str(e)}", 500
 
 
-@current_app.route('/remove_file', methods=['POST'])
-def remove_file():
+@current_app.route('/<language>/remove_file/<file_name>', methods=['POST'])
+def remove_file(language ,file_name):
+    file_path = os.path.join(current_app.root_path + "/statiic/languages/" + language + file_name)
+
     return ""
 
 @current_app.route('/<language>/list')
