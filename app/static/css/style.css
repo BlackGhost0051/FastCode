@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 body{
     background: rgb(172, 213, 255);
 }
@@ -9,6 +15,18 @@ body{
     color: aliceblue;
     width: 10ex;
 }
+
+
+#menu{
+    padding: 0ex;
+}
+
+
+
+
+
+
+
 
 #languages_block{
     margin: 0ex 10ex 0ex 10ex;
@@ -22,7 +40,7 @@ body{
     background: aqua;
 }
 
-li{
+#languages_block li{
     height: 15ex;
     width: 15ex;
     list-style: none;
@@ -30,14 +48,45 @@ li{
     border: solid 0.2ex black;
 }
 
-li a{
+#languages_block li a{
     color: black;
     text-decoration: none;
     text-align: center;
 }
 
-li a img {
+#languages_block li a img {
     height: 10ex;
     width: 10ex;
     padding: 0.5ex;
+}
+
+
+
+
+
+#code_list {
+    padding: 0ex;
+}
+
+#code_list li {
+    display: flex;
+    align-items: center;
+    background: wheat;
+    margin: 0.2ex;
+    padding: 1ex;
+    position: relative;
+}
+
+#code_list li a {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    font-weight: normal;
+    padding: 1ex;
+}
+
+#code_list li button {
+    flex: 0 0 20%;
+    height: 100%;
+    margin-left: 1.5ex;
 }
