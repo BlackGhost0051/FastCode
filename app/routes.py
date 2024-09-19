@@ -1,5 +1,5 @@
 import os
-from flask import render_template, current_app, jsonify, request
+from flask import render_template, current_app, jsonify, request, Response
 
 EXTENSIONS_PATH = {
     '.py': 'python',
@@ -50,7 +50,22 @@ def remove_file(language ,file_name):
         except Exception as e:
             return f"Error removing file: {str(e)}", 500
     else:
-        return "File name not found", 400
+        return "File not found", 400
+
+@current_app.route('/<language>/get_code/<file_name>')
+def get_file(language, file_name):
+    file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + file_name)
+
+    if os.path.exists(file_path):
+        try:
+            with open(file_path, 'r') as file:
+                code = file.read()
+            return Response(code, mimetype='text/plain', status=200)
+
+        except Exception as e:
+            return f"Error reading file: {str(e)}", 500
+    else:
+        return "File not found", 400
 
 @current_app.route('/<language>/list')
 def send_list(language):
