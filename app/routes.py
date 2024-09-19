@@ -40,9 +40,17 @@ def edd_file():
 
 @current_app.route('/<language>/remove_file/<file_name>', methods=['POST'])
 def remove_file(language ,file_name):
-    file_path = os.path.join(current_app.root_path + "/statiic/languages/" + language + file_name)
+    file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + file_name)
+    print(file_path)
 
-    return ""
+    if os.path.exists(file_path):
+        try:
+            os.remove(file_path)
+            return "File removed successfully", 200
+        except Exception as e:
+            return f"Error removing file: {str(e)}", 500
+    else:
+        return "File name not found", 400
 
 @current_app.route('/<language>/list')
 def send_list(language):
