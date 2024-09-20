@@ -11,13 +11,13 @@ EXTENSIONS_PATH = {
 def home():
     return render_template('index.html')
 
-@current_app.route('/python')
-def python():
-    return render_template('/languages/python/main.html')
+@current_app.route('/<language>')
+def python(language):
+    try:
+        return render_template('/languages/' + language + '/main.html')
+    except Exception as e:
+        return "File not found", 400
 
-@current_app.route('/java')
-def java():
-    return  render_template('/languages/java/main.html')
 
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():

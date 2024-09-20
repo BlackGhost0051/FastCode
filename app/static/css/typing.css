@@ -1,0 +1,11 @@
+#failed {
+    color: red;
+}
+
+#skipped {
+    color: gray;
+}
+
+#current {
+    background: gray;
+}
