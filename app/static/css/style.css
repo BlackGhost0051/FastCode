@@ -21,6 +21,31 @@ body{
     padding: 0ex;
 }
 
+#menu ul{
+    padding: 1ex;
+    background: blue;
+    list-style: none;
+
+    display: flex;
+}
+
+#menu ul li{
+    margin: 1ex;
+    background: tomato;
+}
+
+#menu ul li a{
+
+    display: block;
+    padding: 1ex;
+    color: black;
+    
+    text-decoration: none;
+}
+
+#menu ul li #logo{
+    color: white;
+}
 
 
 
