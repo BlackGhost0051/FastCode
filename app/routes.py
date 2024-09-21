@@ -18,6 +18,9 @@ def python(language):
     except Exception as e:
         return "File not found", 400
 
+@current_app.route('/statistics')
+def statistics():
+    return render_template('statistics.html'), 200
 
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
@@ -67,7 +70,7 @@ def get_file(language, file_name):
     else:
         return "File not found", 400
 
-@current_app.route('/<language>/typing', method=['GET'])
+@current_app.route('/<language>/typing', methods=['GET'])
 def typing():
     # ?file=test.py or ?file=RANDOM ( list random return code )
     return "", 200
