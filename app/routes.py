@@ -67,6 +67,11 @@ def get_file(language, file_name):
     else:
         return "File not found", 400
 
+@current_app.route('/<language>/typing', method=['GET'])
+def typing():
+    # ?file=test.py or ?file=RANDOM ( list random return code )
+    return "", 200
+
 @current_app.route('/<language>/list')
 def send_list(language):
     language_folder = os.path.join(current_app.root_path + '/static/languages/' + language)
