@@ -76,7 +76,7 @@ def typing():
     language = request.args.get('language')
 
     if file and language:
-        return render_template('typing.html', file=file)
+        return render_template('typing.html', file=file, language=language)
         #return file + " " + language, 200
     # ?file=test.py or ?file=RANDOM ( list random return code )
     return "File NULL", 400
