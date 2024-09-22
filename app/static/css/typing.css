@@ -9,3 +9,32 @@
 #current {
     background: gray;
 }
+
+
+
+
+#keyboard {
+    background: red;
+    user-select: none;
+    width: 80%;
+    display: inline-block;
+    margin: 2ex;
+}
+
+#keyboard .row {
+    display: flex;
+    justify-content: center;
+    margin: 0.1ex 0;
+}
+
+#keyboard .row .key {
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 2px;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    flex: 1;
+}
