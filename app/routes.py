@@ -70,10 +70,16 @@ def get_file(language, file_name):
     else:
         return "File not found", 400
 
-@current_app.route('/<language>/typing', methods=['GET'])
+@current_app.route('/typing', methods=['GET'])
 def typing():
+    file = request.args.get('file')
+    language = request.args.get('language')
+
+    if file and language:
+        return render_template('typing.html', file=file)
+        #return file + " " + language, 200
     # ?file=test.py or ?file=RANDOM ( list random return code )
-    return "", 200
+    return "File NULL", 400
 
 @current_app.route('/<language>/list')
 def send_list(language):
