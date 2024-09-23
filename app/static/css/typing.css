@@ -14,9 +14,11 @@
 
 
 #keyboard {
+    font-family: 'Courier New', Courier, monospace;
+
     background: red;
     user-select: none;
-    width: 80%;
+    width: 120ex;
     display: inline-block;
     margin: 2ex;
 }
@@ -28,6 +30,8 @@
 }
 
 #keyboard .row .key {
+    height: 3ex;
+
     background-color: #ddd;
     border: 1px solid #aaa;
     border-radius: 5px;
@@ -37,4 +41,8 @@
     font-size: 16px;
     transition: background-color 0.3s;
     flex: 1;
+}
+
+#keyboard .row .key.active {
+    background-color: red;
 }
