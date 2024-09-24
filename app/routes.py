@@ -1,4 +1,5 @@
 import os
+import sqlite3
 from flask import render_template, current_app, jsonify, request, Response
 
 EXTENSIONS_PATH = {
