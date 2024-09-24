@@ -1,3 +1,28 @@
+main{
+    display: grid;
+    place-items: center;
+}
+
+#typing_container{
+    background: red;
+    
+    margin: 0ex 2ex 0ex 2ex;
+}
+
+
+#code_typing{
+    font-family: 'Courier New', Courier, monospace;
+
+    height: 40ex;
+
+    padding: 5ex;
+
+
+    white-space: pre-wrap;
+    background: black;
+    color: white;
+}
+
 #failed {
     color: red;
 }
@@ -15,8 +40,7 @@
 
 #keyboard {
     font-family: 'Courier New', Courier, monospace;
-
-    background: red;
+    background: black;
     user-select: none;
     width: 120ex;
     display: inline-block;

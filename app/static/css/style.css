@@ -8,21 +8,9 @@ body{
     background: rgb(172, 213, 255);
 }
 
-#app_name{
-    margin: 2ex;
-    padding: 1ex;
-    background: black;
-    color: aliceblue;
-    width: 10ex;
-}
-
-
-#menu{
-    padding: 0ex;
-}
 
 #menu ul{
-    padding: 1ex;
+    padding: 0.5ex;
     background: blue;
     list-style: none;
 
@@ -30,7 +18,7 @@ body{
 }
 
 #menu ul li{
-    margin: 1ex;
+    margin: 0.5ex;
     background: tomato;
 }
 
