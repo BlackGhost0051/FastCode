@@ -1,4 +1,7 @@
 var currentUrl = window.location.href;
+var baseUrl = currentUrl.slice(0, currentUrl.lastIndexOf("/"));
+var language = currentUrl.split("/").pop();
+console.log("URL " + currentUrl + " " + language + " " + baseUrl);
 var code_list = document.getElementById("code_list")
 
 
@@ -13,7 +16,7 @@ fetch(urlTask)
             var deleteButton = document.createElement("button");
 
             a.textContent = file;
-            a.href = currentUrl + "/get_code/" + file;
+            a.href = baseUrl + "/typing?file=" + file + "&language=" + language;
 
             deleteButton.textContent = "Delete";
             deleteButton.addEventListener('click', function(){
