@@ -91,3 +91,10 @@ def send_list(language):
         return jsonify(files) , 200
     except FileNotFoundError:
         return jsonify({"error": "Folder not found"}), 404
+
+@current_app.route('/languages_list')
+def languages_list():
+    try:
+        return jsonify(EXTENSIONS_PATH), 200
+    except Exception as e:
+        return jsonify({"error": "Something go wrong"}), 500
