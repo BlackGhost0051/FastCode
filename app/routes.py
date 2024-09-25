@@ -4,7 +4,8 @@ from flask import render_template, current_app, jsonify, request, Response
 
 EXTENSIONS_PATH = {
     '.py': 'python',
-    '.java': 'java'
+    '.java': 'java',
+    '.c': 'c'
 }
 
 
