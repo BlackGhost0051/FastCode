@@ -16,7 +16,7 @@ def home():
 @current_app.route('/<language>')
 def python(language):
     try:
-        return render_template('/languages/' + language + '/main.html')
+        return render_template('/language.html', language=language)
     except Exception as e:
         return "File not found", 400
 
