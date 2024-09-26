@@ -39,6 +39,17 @@ body{
 
 
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2ex;
+}
+
+#random_button {
+    padding: 2ex;
+    font-size: large;
+}
 
 
 #languages_block{

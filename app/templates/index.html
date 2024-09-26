@@ -16,7 +16,9 @@
 
     <main>
 
-        <button id="random_button">Random</button>
+        <div class="button-container">
+            <button id="random_button">Random</button>
+        </div>
 
         <form action="{{ url_for('edd_file') }}" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" accept=".py, .java, .cpp, .c, .js">
