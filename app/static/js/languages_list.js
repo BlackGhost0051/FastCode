@@ -22,7 +22,7 @@ fetch(taskUrl)
             var a = document.createElement("a");
             var img = document.createElement("img");
 
-            img.src = `/static/images/${value}_logo.png`;
+            img.src = `/static/images/${value}_logo.svg`;
             img.alt = `${value} logo`;
 
             a.textContent = "\n" + value;
