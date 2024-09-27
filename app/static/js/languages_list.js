@@ -21,13 +21,15 @@ fetch(taskUrl)
             var li = document.createElement("li");
             var a = document.createElement("a");
             var img = document.createElement("img");
+            var p = document.createElement("p");
 
             img.src = `/static/images/${value}_logo.svg`;
             img.alt = `${value} logo`;
 
-            a.textContent = "\n" + value;
+            p.textContent = value;
             a.href = `/${value}`;
 
+            a.prepend(p);
             a.prepend(img);
             li.appendChild(a);
             languages_block.appendChild(li);
