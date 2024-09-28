@@ -23,7 +23,7 @@ fetch(taskUrl)
             var img = document.createElement("img");
             var p = document.createElement("p");
 
-            img.src = `/static/images/${value}_logo.svg`;
+            img.src = `/static/logo/${value}_logo.svg`;
             img.alt = `${value} logo`;
 
             p.textContent = value;
