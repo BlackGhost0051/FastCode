@@ -28,11 +28,12 @@ main{
 }
 
 #skipped {
-    color: gray;
+    color: rgb(56, 56, 56);
 }
 
 #current {
-    background: gray;
+    background: rgb(180, 180, 180);
+    color: white;
 }
 
 
