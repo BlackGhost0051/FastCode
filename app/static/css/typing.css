@@ -44,8 +44,9 @@ main{
     color: white;
 }
 
-#failed {
+.failed {
     color: red;
+    background: rgb(71, 0, 0);
 }
 
 #skipped {

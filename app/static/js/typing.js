@@ -2,6 +2,7 @@ var typingIndex = 0;
 var typingSpeed = 100;
 var code_typing = document.getElementById("code_typing");
 var code;
+var failedChars = [];
 
 const urlParams = new URLSearchParams(window.location.search);
 const file = urlParams.get('file');
@@ -43,6 +44,9 @@ function typing(reverse = false) {
     if (reverse && typingIndex > 0) {
         chars[typingIndex].classList.remove("blinking");
         if (typingIndex > 0) {
+            if (chars[typingIndex - 1].classList.contains("failed")) {
+                chars[typingIndex - 1].classList.remove("failed");
+            }
             chars[typingIndex - 1].classList.add("blinking");
         }
     } else if (typingIndex < code.length) {
@@ -55,6 +59,19 @@ function typing(reverse = false) {
 
 function keyDown(event) {
     const currentChar = code[typingIndex];
+    const chars = document.getElementsByClassName("code-char");
+
+
+    if(typingIndex == code.length){
+        console.log("End");
+        console.log(failedChars);
+        return;
+    }
+
+    if(event.key === "Shift"){
+        return;
+    }
+
 
     if (event.key === "Enter") {
         if (currentChar === '\n') {
@@ -78,6 +95,12 @@ function keyDown(event) {
         typingIndex++;
         typing();
         console.log("Character matched:", event.key, "Index now:", typingIndex);
+    } else {
+        chars[typingIndex].classList.add("failed");
+        console.log("Incorrect character:", event.key, "Expected:", currentChar, "Index now:", typingIndex);
+        failedChars.push(currentChar);
+        typingIndex++;
+        typing();
     }
 
     const keyElement = Array.from(document.getElementsByClassName('key')).find(key => key.textContent.toLowerCase() === event.key.toLowerCase());
