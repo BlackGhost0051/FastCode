@@ -10,6 +10,27 @@ main{
 }
 
 
+
+@keyframes blink {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.blinking {
+    a1nimation: blink 1s step-end infinite;
+    background-color: rgb(150, 150, 150);
+}
+
+
+
+
 #code_typing{
     font-family: 'Courier New', Courier, monospace;
 
