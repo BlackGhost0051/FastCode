@@ -71,6 +71,12 @@ function keyDown(event) {
     if(event.key === "Shift"){
         return;
     }
+
+    if (event.key === "Tab") {
+        event.preventDefault();
+        console.log("TAB");
+        return;
+    }
     // ? use allowed char or ban keys
     // Need make Tab = ' ', ' ', ' ' , ' '
     // Problem with \n user dont see element ( add class new_line ( css = background url(img_new_line.svg) size 0.4x0.4 ex) ?
