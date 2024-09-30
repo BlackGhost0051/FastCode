@@ -20,9 +20,9 @@
             <button id="random_button">Random</button>
         </div>
 
-        <form action="{{ url_for('edd_file') }}" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".py, .java, .cpp, .c, .js">
-            <input type="submit" value="Upload">
+        <form action="{{ url_for('edd_file') }}" method="POST" enctype="multipart/form-data" id="file-upload-form">
+            <input type="file" name="file" accept=".py, .java, .cpp, .c, .js" class="file-input">
+            <input type="submit" value="Upload" class="submit-btn">
         </form>
         
         <ul id="languages_block">
