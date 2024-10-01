@@ -8,6 +8,9 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
+@current_app.errorhandler(404)
+def page_not_found(e):
+    return render_template('/error.html', error_code=404, message=str(e)), 404
 
 @current_app.route('/')
 def home():
@@ -18,7 +21,7 @@ def python(language):
     try:
         return render_template('/language.html', language=language)
     except Exception as e:
-        return "File not found", 400
+        return render_template('/error.html', error_code=400, message="File not found"), 400
 
 @current_app.route('/statistics')
 def statistics():
@@ -28,19 +31,19 @@ def statistics():
 def edd_file():
     file = request.files['file']
     if file.filename == '':
-        return "No selected file", 400
+        return render_template('/error.html', error_code=400, message="No selected file"), 400
 
     file_extension = os.path.splitext(file.filename)[1]
     file_path = os.path.join(current_app.root_path, 'static', 'languages', EXTENSIONS_PATH[file_extension], file.filename)
 
     if os.path.exists(file_path):
-        return "File name is exist", 400
+        return render_template('/error.html', error_code=400, message="File name is exist"), 400
     else:
         try:
             file.save(file_path)
             return f"File saved at {file_path}", 200
         except Exception as e:
-            return f"Error: {str(e)}", 500
+            return render_template('/error.html', error_code=500, message=str(e)), 500
 
 
 @current_app.route('/<language>/remove_file/<file_name>', methods=['POST'])
@@ -53,9 +56,9 @@ def remove_file(language ,file_name):
             os.remove(file_path)
             return "File removed successfully", 200
         except Exception as e:
-            return f"Error removing file: {str(e)}", 500
+            return render_template('/error.html', error_code=500, message=str(e)), 500
     else:
-        return "File not found", 400
+        return render_template('/error.html', error_code=400, message="File not found"), 400
 
 @current_app.route('/<language>/get_code/<file_name>')
 def get_file(language, file_name):
@@ -68,9 +71,9 @@ def get_file(language, file_name):
             return Response(code, mimetype='text/plain', status=200)
 
         except Exception as e:
-            return f"Error reading file: {str(e)}", 500
+            return render_template('/error.html', error_code=500, message=str(e)), 500
     else:
-        return "File not found", 400
+        return render_template('/error.html', error_code=400, message="File not found"), 400
 
 @current_app.route('/typing', methods=['GET'])
 def typing():
@@ -79,9 +82,8 @@ def typing():
 
     if file and language:
         return render_template('typing.html', file=file, language=language)
-        #return file + " " + language, 200
-    # ?file=test.py or ?file=RANDOM ( list random return code )
-    return "File NULL", 400
+
+    return render_template('/error.html', error_code=400, message="File NULL"), 400
 
 @current_app.route('/<language>/list')
 def send_list(language):
@@ -90,11 +92,11 @@ def send_list(language):
         files = os.listdir(language_folder)
         return jsonify(files) , 200
     except FileNotFoundError:
-        return jsonify({"error": "Folder not found"}), 404
+        return render_template('/error.html', error_code=404, message="Folder not found"), 404
 
 @current_app.route('/languages_list')
 def languages_list():
     try:
         return jsonify(EXTENSIONS_PATH), 200
     except Exception as e:
-        return jsonify({"error": "Something go wrong"}), 500
+        return render_template('/error.html', error_code=500, message="Something go wrong"), 500
