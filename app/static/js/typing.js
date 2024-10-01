@@ -27,8 +27,16 @@ fetch(codeTaskUrl)
         let char = code[i];
         let span = document.createElement("span");
         span.textContent = char;
+        
         span.classList.add("code-char");
         code_typing.appendChild(span);
+        
+        if(char === '\n'){
+            console.log("Line");
+            span.classList.add("new-line-char");
+            var br = document.createElement("br");
+            code_typing.appendChild(br);
+        }
     }
 
     typing();
@@ -62,30 +70,48 @@ function keyDown(event) {
     const chars = document.getElementsByClassName("code-char");
 
 
-    if(typingIndex == code.length){
+    if(event.key === "Shift"){
+        return;
+    }
+
+    if(typingIndex == code.length - 1){
         console.log("End");
         console.log(failedChars);
         return;
     }
 
-    if(event.key === "Shift"){
-        return;
-    }
+    
 
     if (event.key === "Tab") {
         event.preventDefault();
         console.log("TAB");
+
+        for(var i = 0; i < 4; i++){
+            if (code[typingIndex] === ' ') {
+                typingIndex++;
+                typing();
+                console.log("Space added for Tab, index now:", typingIndex);
+            } else {
+                chars[typingIndex].classList.add("failed");
+                failedChars.push(currentChar);
+                typingIndex++;
+                typing();
+            }
+        }
+
         return;
     }
-    // ? use allowed char or ban keys
-    // Need make Tab = ' ', ' ', ' ' , ' '
-    // Problem with \n user dont see element ( add class new_line ( css = background url(img_new_line.svg) size 0.4x0.4 ex) ?
 
     if (event.key === "Enter") {
         if (currentChar === '\n') {
-            typing();
             typingIndex++;
+            typing();
             console.log("New line detected, moving index to:", typingIndex);
+        } else {
+            chars[typingIndex].classList.add("failed");
+            failedChars.push(currentChar);
+            typingIndex++;
+            typing();
         }
         return;
     }

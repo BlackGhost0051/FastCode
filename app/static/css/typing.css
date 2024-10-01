@@ -93,3 +93,13 @@ main{
 #keyboard .row .key.active {
     background-color: red;
 }
+
+.new-line-char{
+    display: inline-block;
+}
+
+.new-line-char::before {
+    margin-left: 0.5ex;
+    content: '\21B5';
+    padding: 0.1ex;
+}
