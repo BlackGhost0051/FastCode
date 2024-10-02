@@ -3,3 +3,27 @@
     padding: 0;
     border: 0;
 }
+
+body{
+    background: red;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    width: 80%;
+}
+
+#status_code{
+    font-size: 20ex;
+    text-align: center;
+    background: blue;
+}
+
+#message{
+    font-size: 3ex;
+    text-align: center;
+    background: green;
+}

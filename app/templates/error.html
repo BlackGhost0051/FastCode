@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
 </head>
 <body>
-    <div>{{ status_code }}</div>
-    <div>{{ message }}</div>
-
-    <script></script>
-
+    <main>
+        <div id="status_code">{{ status_code }}</div>
+        <div id="message">{{ message }}</div>
+    </main>
     <script src="{{ url_for('static', filename='js/error.js') }}"></script>
 </body>
 </html>
