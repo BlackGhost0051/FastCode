@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ error_code }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
 </head>
 <body>
-    <h1>{{ error_code }}</h1>
-    <h1>{{ message }}</h1>
+    <div>{{ error_code }}</div>
+    <div>{{ message }}</div>
+
+    <script></script>
+
+    <script src="{{ url_for('static', filename='js/error.js') }}"></script>
 </body>
 </html>
