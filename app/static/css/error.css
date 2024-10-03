@@ -5,33 +5,35 @@
 }
 
 body{
-    background: red;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    font-family: Arial, sans-serif;
+    color: white;
     transition: background 1s ease;
 }
 
 main{
     width: 80%;
+    background: rgba(40, 40, 40, 0.483);
 }
 
 #status_code{
-    font-size: 20ex;
+    padding: 0.5ex;
+    font-size: 30ex;
     text-align: center;
-    background: blue;
+    
 }
 
 #status_code span {
     opacity: 1;
-    background: white;
     transition: opacity 0.5s ease;
 }
 
 #message{
+    padding: 3ex;
     font-size: 3ex;
     text-align: center;
-    background: green;
+    background: 
 }
