@@ -35,9 +35,9 @@ main{
     font-family: 'Courier New', Courier, monospace;
 
     height: 40ex;
-
     padding: 5ex;
 
+    overflow-y: auto;
 
     white-space: pre-wrap;
     background: black;

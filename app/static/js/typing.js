@@ -62,6 +62,7 @@ function typing(reverse = false) {
             chars[typingIndex - 1].classList.remove("blinking");
         }
         chars[typingIndex].classList.add("blinking");
+        scrollToCurrentChar();
     }
 }
 
@@ -150,6 +151,12 @@ function keyUp(event) {
     }
 }
 
+function scrollToCurrentChar() {
+    const currentChar = document.getElementsByClassName("blinking")[0];
+    if (currentChar) {
+        currentChar.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+}
 
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
