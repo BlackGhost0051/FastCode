@@ -23,8 +23,15 @@ def python(language):
     except Exception as e:
         return render_template('/error.html', status_code=400, message="File not found"), 400
 
+# Add route
+# clear statistics
+# send statistics
+
 @current_app.route('/statistics')
 def statistics():
+    # check if is database
+    # if not make
+    # get info from database statistic
     return render_template('statistics.html'), 200
 
 @current_app.route('/add_file', methods=['POST'])
