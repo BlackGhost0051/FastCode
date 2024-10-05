@@ -78,6 +78,8 @@ function keyDown(event) {
     if(typingIndex == code.length - 1){
         console.log("End");
         console.log(failedChars);
+
+        alert("End");
         return;
     }
 
