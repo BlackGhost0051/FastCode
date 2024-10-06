@@ -8,7 +8,7 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
-DATABASE = 'database.db'
+DATABASE = os.path.join(os.path.dirname(__file__), 'database.db')
 
 @current_app.errorhandler(404)
 def page_not_found(e):
@@ -38,8 +38,8 @@ def statistics():
 
 @current_app.route('/get_statistics')
 def statistics_data():
-    return " "
-@current_app.route('/send_statistic', method=['POST'])
+    return DATABASE
+@current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
     return " "
 @current_app.route('/statistics_clear')
