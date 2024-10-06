@@ -8,6 +8,8 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
+DATABASE = 'database.db'
+
 @current_app.errorhandler(404)
 def page_not_found(e):
     return render_template('/error.html', status_code=404, message=str(e)), 404
@@ -34,6 +36,15 @@ def statistics():
     # get info from database statistic
     return render_template('statistics.html'), 200
 
+@current_app.route('/get_statistics')
+def statistics_data():
+    return " "
+@current_app.route('/send_statistic', method=['POST'])
+def send_statistic():
+    return " "
+@current_app.route('/statistics_clear')
+def statistics_clear():
+    return " "
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
     file = request.files['file']
