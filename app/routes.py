@@ -15,6 +15,8 @@ def db_init(database):
     print(path)
     if not os.path.exists(path):
         print("Test")
+        # db structure
+        # time chars typing speed
     return " "
 
 @current_app.errorhandler(404)
