@@ -51,10 +51,10 @@ def statistics_data():
     return DATABASE
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
-    return " "
+    return render_template('/error.html', status_code=404, message="Not found!!"), 404
 @current_app.route('/statistics_clear')
 def statistics_clear():
-    return " "
+    return render_template('/error.html', status_code=404, message="Not found!!"), 404
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
     file = request.files['file']
