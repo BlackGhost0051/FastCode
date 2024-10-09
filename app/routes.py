@@ -10,14 +10,31 @@ EXTENSIONS_PATH = {
 
 DATABASE = 'database.db'
 
-def db_init(database):
-    path = os.path.join(os.path.dirname(__file__)) + "/" + database
+def db_init():
+    path = os.path.join(os.path.dirname(__file__)) + "/" + DATABASE
     print(path)
     if not os.path.exists(path):
-        print("Test")
-        # db structure
-        # time chars typing speed
-    return " "
+        try:
+            connect = sqlite3.connect(path)
+            cursor = connect.cursor()
+            cursor.execute('''
+                            CREATE TABLE statistics (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                chars TEXT,
+                                typing_speed REAL,
+                                file_name TEXT
+                            )
+            ''')
+            connect.commit()
+            print("Database and table created successfully.")
+        except sqlite3.Error as e:
+            print(f"Error creating database: {e}")
+        finally:
+            connect.close()
+    else:
+        print("Database already exists.")
+    return path
 
 @current_app.errorhandler(404)
 def page_not_found(e):
@@ -47,8 +64,28 @@ def statistics():
 
 @current_app.route('/get_statistics')
 def statistics_data():
-    db_init(DATABASE)
-    return DATABASE
+    path = db_init()
+    statistics_data = []
+
+    try:
+        connect = sqlite3.connect(path)
+        cursor = connect.cursor()
+        cursor.execute("SELECT time, chars, typing_speed, file_name FROM statistics")
+        rows = cursor.fetchall()
+
+        for row in rows:
+            statistics_data.append({
+                "time": row[0],
+                "chars": row[1],
+                "typing_speed": row[2],
+                "file_name": row[3]
+            })
+
+        return jsonify(statistics_data), 200
+    except sqlite3.Error as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        connect.close()
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
     return render_template('/error.html', status_code=404, message="Not found!!"), 404
