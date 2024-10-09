@@ -3,6 +3,7 @@ var typingSpeed = 100;
 var code_typing = document.getElementById("code_typing");
 var code;
 var failedChars = [];
+var typingCompleted = false;
 
 const urlParams = new URLSearchParams(window.location.search);
 const file = urlParams.get('file');
@@ -70,6 +71,9 @@ function keyDown(event) {
     const currentChar = code[typingIndex];
     const chars = document.getElementsByClassName("code-char");
 
+    if(typingCompleted){
+        return;
+    }
 
     if(event.key === "Shift"){
         return;
@@ -77,9 +81,11 @@ function keyDown(event) {
 
     if(typingIndex == code.length - 1){
         console.log("End");
+        typingCompleted = true;
         console.log(failedChars);
 
         alert("End");
+        sendStatistics(failedChars, typingSpeed, file);
         return;
     }
 
@@ -158,6 +164,29 @@ function scrollToCurrentChar() {
     if (currentChar) {
         currentChar.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+}
+
+function sendStatistics(chars, typingSpeed, fileName){
+    const data = {
+        chars: chars.join(','),
+        typingSpeed: typingSpeed,
+        file_name: fileName
+    };
+
+    fetch('/send_statistic',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 document.addEventListener('keydown', keyDown);

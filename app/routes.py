@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from datetime import datetime
 from flask import render_template, current_app, jsonify, request, Response
 
 EXTENSIONS_PATH = {
@@ -88,7 +89,31 @@ def statistics_data():
         connect.close()
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
-    return render_template('/error.html', status_code=404, message="Not found!!"), 404
+    path = db_init()
+
+    data = request.get_json()
+    chars = data.get('chars')
+    typing_speed = data.get('typing_speed')
+    file_name = data.get('file_name')
+
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    try:
+        connect = sqlite3.connect(path)
+        cursor = connect.cursor()
+        cursor.execute('''
+                    INSERT INTO statistics (time, chars, typing_speed, file_name)
+                    VALUES (?, ?, ?, ?)
+                ''', (current_time, chars, typing_speed, file_name))
+        connect.commit()
+        return jsonify({"message": "Statistics saved successfully"}), 200
+
+    except sqlite3.Error as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        connect.close()
+
+
 @current_app.route('/statistics_clear')
 def statistics_clear():
     return render_template('/error.html', status_code=404, message="Not found!!"), 404
