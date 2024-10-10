@@ -58,9 +58,6 @@ def python(language):
 
 @current_app.route('/statistics')
 def statistics():
-    # check if is database
-    # if not make
-    # get info from database statistic
     return render_template('statistics.html'), 200
 
 @current_app.route('/get_statistics')
@@ -116,7 +113,18 @@ def send_statistic():
 
 @current_app.route('/statistics_clear')
 def statistics_clear():
-    return render_template('/error.html', status_code=404, message="Not found!!"), 404
+    path = db_init()
+    try:
+        connect = sqlite3.connect(path)
+        cursor = connect.cursor()
+        cursor.execute('DELETE FROM statistics')
+        connect.commit()
+        return "Clear", 200
+    except sqlite3.Error as e:
+        return render_template('/error.html', status_code=500, message=f"{e}"), 500
+    finally:
+        connect.close()
+
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
     file = request.files['file']
