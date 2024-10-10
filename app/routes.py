@@ -26,7 +26,7 @@ def db_init():
                                 typing_speed REAL,
                                 file_name TEXT
                             )
-            ''')
+            ''') # need change structure | failed_chars true_chars
             connect.commit()
             print("Database and table created successfully.")
         except sqlite3.Error as e:
@@ -52,9 +52,6 @@ def python(language):
     except Exception as e:
         return render_template('/error.html', status_code=400, message="File not found"), 400
 
-# Add route
-# clear statistics
-# send statistics
 
 @current_app.route('/statistics')
 def statistics():
