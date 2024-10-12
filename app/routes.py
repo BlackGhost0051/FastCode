@@ -26,7 +26,7 @@ def db_init():
                                 typing_speed REAL,
                                 file_name TEXT
                             )
-            ''') # need change structure | failed_chars true_chars
+            ''')
             connect.commit()
             print("Database and table created successfully.")
         except sqlite3.Error as e:
