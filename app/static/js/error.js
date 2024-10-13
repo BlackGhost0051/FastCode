@@ -28,7 +28,7 @@ animate();
 
 function changeColor() {
     hue = (hue + 1) % 360;
-    body.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+    body.style.backgroundColor = `hsl(${hue}, 100%, 25%)`;
 }
 
-setInterval(changeColor, 100);
+setInterval(changeColor, 150);
