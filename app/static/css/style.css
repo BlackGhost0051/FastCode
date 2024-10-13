@@ -6,6 +6,7 @@
 
 body{
     background: rgb(172, 213, 255);
+    font-family: Arial, sans-serif;
 }
 
 
@@ -26,7 +27,7 @@ body{
 
     display: block;
     padding: 1ex;
-    color: black;
+    color: rgb(255, 255, 255);
     
     text-decoration: none;
 }
@@ -152,4 +153,19 @@ body{
 
     height: auto;
     align-self: stretch;
+}
+
+
+#info_div{
+    margin: 5ex;
+    padding: 1ex;
+
+    background: gray;
+}
+
+.stat-div{
+    background: #2980b9;
+    margin: 1ex;
+    padding: 1ex;
+    color: #fff;   
 }
