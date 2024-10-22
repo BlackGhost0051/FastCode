@@ -3,23 +3,43 @@
 ## Structure
 
 ```
-FastCode/
-├── app/
-│   ├── __init__.py          # Initialize the Flask application
-│   ├── routes.py            # Define your route handlers
-│   ├── static/
-│   │   ├── css/             # CSS files
-│   │   │   └── style.css
-│   │   ├── images/
-│   │   ├── js/              # JavaScript files
-│   │       └── script.js
-│   ├── templates/           # HTML files
-│   │   ├── languages/
-│   │   ├── index.html
-│   └── database.db          # SQLite database file
-├── .env                     # Environment variables (e.g., Flask secret key)
-├── config.py                # Configuration settings for Flask app
-├── requirements.txt         # List of dependencies
-└── run.py                   # Entry point to run the Flask app
-
+FasrCode/
+├── README.md
+├── app
+│         ├── __init__.py   # Initialize the Flask application
+│         ├── database.db   # SQLite database file
+│         ├── routes.py     # Define your route handlers
+│         ├── static
+│         │         ├── css                 # CSS files
+│         │         │         ├── code.css
+│         │         │         ├── error.css
+│         │         │         ├── style.css
+│         │         │         └── typing.css
+│         │         ├── js                  # JavaScript files
+│         │         │         ├── code_list.js
+│         │         │         ├── error.js
+│         │         │         ├── languages_list.js
+│         │         │         ├── random_typing.js
+│         │         │         ├── statistics.js
+│         │         │         └── typing.js
+│         │         ├── languages           # Languages files
+│         │         │         ├── c
+│         │         │         │   └── test.c
+│         │         │         ├── java
+│         │         │         │   └── test.java
+│         │         │         └── python
+│         │         │             └── test.py
+│         │         └── logo                # Logo
+│         │             ├── c_logo.svg
+│         │             ├── java_logo.svg
+│         │             └── python_logo.svg
+│         └── templates                     # HTML files
+│             ├── error.html
+│             ├── index.html
+│             ├── language.html
+│             ├── statistics.html
+│             └── typing.html
+├── config.py           # Configuration settings for Flask app
+├── requirements.txt    # List of dependencies
+└── run.py              # Entry point to run the Flask app
 ```
