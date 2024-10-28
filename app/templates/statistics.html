@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Statistics</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -15,6 +16,9 @@
     </nav>
 
     <main>
+        <div class="diagram_div">
+            <canvas id="all_info_histogram"></canvas>
+        </div>
         <div id="info_div"></div>
     </main>
 

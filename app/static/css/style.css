@@ -169,3 +169,8 @@ body{
     padding: 1ex;
     color: #fff;   
 }
+
+.diagram_div{
+    width: 80%; 
+    margin: auto;
+}
