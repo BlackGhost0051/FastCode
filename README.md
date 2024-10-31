@@ -43,3 +43,34 @@ FasrCode/
 ├── requirements.txt    # List of dependencies
 └── run.py              # Entry point to run the Flask app
 ```
+
+## How add a new language
+
+### Make language dir
+
+`
+app/static/languages
+`
+
+### Modify EXTENSIONS_PATH
+Add your language
+
+`
+app/routes.py
+`
+
+```python
+EXTENSIONS_PATH = {
+    '.py': 'python',
+    '.java': 'java',
+    '.c': 'c'
+}
+```
+
+### Add logo
+
+language + _logo.svg
+
+`
+app/static/logo
+`
