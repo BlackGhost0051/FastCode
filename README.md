@@ -1,5 +1,7 @@
 # Fast Code
 
+# Content
+
 ## Structure
 
 ```
