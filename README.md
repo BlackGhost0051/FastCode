@@ -2,6 +2,12 @@
 
 # Content
 
+- [Structure](#structure)
+- [How add a new language](#how-add-a-new-language)
+  - [Make language dir](#make-language-dir)
+  - [Modify EXTENSIONS_PATH](#modify-extensions_path)
+  - [Add logo](#add-logo)
+
 ## Structure
 
 ```
