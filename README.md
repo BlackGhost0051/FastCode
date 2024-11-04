@@ -1,5 +1,7 @@
 # Fast Code
 
+Main info.
+
 # Content
 
 - [Structure](#structure)
@@ -82,3 +84,5 @@ language + _logo.svg
 `
 app/static/logo
 `
+
+## Statistic
