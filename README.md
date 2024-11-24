@@ -1,7 +1,5 @@
 # Fast Code
 
-Main info.
-
 # Content
 
 - [Structure](#structure)
@@ -9,6 +7,7 @@ Main info.
   - [Make language dir](#make-language-dir)
   - [Modify EXTENSIONS_PATH](#modify-extensions_path)
   - [Add logo](#add-logo)
+- [Statistic](#statistic)
 
 ## Structure
 
