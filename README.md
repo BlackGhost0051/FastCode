@@ -85,3 +85,4 @@ app/static/logo
 `
 
 ## Statistic
+chart.js
