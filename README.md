@@ -86,3 +86,12 @@ app/static/logo
 
 ## Statistic
 chart.js
+
+
+$$
+
+Login
+Register
+Statistic
+Players VS
+Single typing
