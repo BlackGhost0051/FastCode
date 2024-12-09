@@ -3,6 +3,8 @@ import sqlite3
 from datetime import datetime
 from flask import render_template, current_app, jsonify, request, Response
 
+from app.Managers.DataBaseManager import DataBaseManager
+
 EXTENSIONS_PATH = {
     '.py': 'python',
     '.java': 'java',
@@ -10,32 +12,6 @@ EXTENSIONS_PATH = {
 }
 
 DATABASE = 'database.db'
-
-def db_init():
-    path = os.path.join(os.path.dirname(__file__)) + "/" + DATABASE
-    print(path)
-    if not os.path.exists(path):
-        try:
-            connect = sqlite3.connect(path)
-            cursor = connect.cursor()
-            cursor.execute('''
-                            CREATE TABLE statistics (
-                                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                chars TEXT,
-                                typing_speed REAL,
-                                file_name TEXT
-                            )
-            ''')
-            connect.commit()
-            print("Database and table created successfully.")
-        except sqlite3.Error as e:
-            print(f"Error creating database: {e}")
-        finally:
-            connect.close()
-    else:
-        print("Database already exists.")
-    return path
 
 @current_app.errorhandler(404)
 def page_not_found(e):
@@ -59,7 +35,9 @@ def statistics():
 
 @current_app.route('/get_statistics')
 def statistics_data():
-    path = db_init()
+    db_manager = DataBaseManager()
+    path = db_manager.db_path
+    print("Path = " + path)
     statistics_data = []
 
     try:
@@ -83,7 +61,8 @@ def statistics_data():
         connect.close()
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
-    path = db_init()
+    db_manager = DataBaseManager()
+    path = db_manager.db_path
 
     data = request.get_json()
     chars = data.get('chars')
@@ -110,7 +89,8 @@ def send_statistic():
 
 @current_app.route('/statistics_clear')
 def statistics_clear():
-    path = db_init()
+    db_manager = DataBaseManager()
+    path = db_manager.db_path
     try:
         connect = sqlite3.connect(path)
         cursor = connect.cursor()
