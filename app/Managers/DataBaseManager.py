@@ -33,3 +33,14 @@ class DataBaseManager:
         else:
             print("Database already exists.")
         return path
+
+    def makeHash(self):
+        self
+
+
+    def loginUser(self):
+        self
+
+    def registerUser(self):
+        self
+
