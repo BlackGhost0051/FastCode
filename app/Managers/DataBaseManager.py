@@ -34,7 +34,7 @@ class DataBaseManager:
             print("Database already exists.")
         return path
 
-    def makeHash(self):
+    def verify_password(self):
         self
 
 
