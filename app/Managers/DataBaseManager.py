@@ -5,6 +5,16 @@ import sqlite3
 class DataBaseManager:
     DATABASE = 'database.db'
 
+    DATABASE_STRUCTURE = '''
+                                CREATE TABLE statistics (
+                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                    chars TEXT,
+                                    typing_speed REAL,
+                                    file_name TEXT
+                                )
+    '''
+
     def __init__(self):
         self.db_path = self.db_init()
 
@@ -15,15 +25,7 @@ class DataBaseManager:
             try:
                 connect = sqlite3.connect(path)
                 cursor = connect.cursor()
-                cursor.execute('''
-                                CREATE TABLE statistics (
-                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                    chars TEXT,
-                                    typing_speed REAL,
-                                    file_name TEXT
-                                )
-                ''')
+                cursor.execute(self.DATABASE_STRUCTURE)
                 connect.commit()
                 print("Database and table created successfully.")
             except sqlite3.Error as e:
