@@ -36,29 +36,10 @@ def statistics():
 @current_app.route('/get_statistics')
 def statistics_data():
     db_manager = DataBaseManager()
-    path = db_manager.db_path
-    print("Path = " + path)
-    statistics_data = []
+    statistics_data =  db_manager.get_statistics()
+    return jsonify(statistics_data), 200
 
-    try:
-        connect = sqlite3.connect(path)
-        cursor = connect.cursor()
-        cursor.execute("SELECT time, chars, typing_speed, file_name FROM statistics")
-        rows = cursor.fetchall()
 
-        for row in rows:
-            statistics_data.append({
-                "time": row[0],
-                "chars": row[1],
-                "typing_speed": row[2],
-                "file_name": row[3]
-            })
-
-        return jsonify(statistics_data), 200
-    except sqlite3.Error as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        connect.close()
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
     db_manager = DataBaseManager()
