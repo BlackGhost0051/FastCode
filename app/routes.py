@@ -43,7 +43,6 @@ def statistics_data():
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
     db_manager = DataBaseManager()
-    path = db_manager.db_path
 
     data = request.get_json()
     chars = data.get('chars')
@@ -52,20 +51,8 @@ def send_statistic():
 
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    try:
-        connect = sqlite3.connect(path)
-        cursor = connect.cursor()
-        cursor.execute('''
-                    INSERT INTO statistics (time, chars, typing_speed, file_name)
-                    VALUES (?, ?, ?, ?)
-                ''', (current_time, chars, typing_speed, file_name))
-        connect.commit()
-        return jsonify({"message": "Statistics saved successfully"}), 200
-
-    except sqlite3.Error as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        connect.close()
+    message = db_manager.send_statistic(data, chars, typing_speed, file_name, current_time)
+    return jsonify(message), 200
 
 
 @current_app.route('/statistics_clear')
