@@ -58,17 +58,9 @@ def send_statistic():
 @current_app.route('/statistics_clear')
 def statistics_clear():
     db_manager = DataBaseManager()
-    path = db_manager.db_path
-    try:
-        connect = sqlite3.connect(path)
-        cursor = connect.cursor()
-        cursor.execute('DELETE FROM statistics')
-        connect.commit()
-        return "Clear", 200
-    except sqlite3.Error as e:
-        return render_template('/error.html', status_code=500, message=f"{e}"), 500
-    finally:
-        connect.close()
+
+    message = db_manager.statistics_clear()
+    return message, 200
 
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
