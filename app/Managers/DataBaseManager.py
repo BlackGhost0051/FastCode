@@ -76,6 +76,17 @@ class DataBaseManager:
         finally:
             connect.close()
 
+    def statistics_clear(self):
+        try:
+            connect = sqlite3.connect(self.db_path)
+            cursor = connect.cursor()
+            cursor.execute('DELETE FROM statistics')
+            connect.commit()
+            return "Clear"
+        except sqlite3.Error as e:
+            return "Error"
+        finally:
+            connect.close()
     def verify_password(self):
         self
 
