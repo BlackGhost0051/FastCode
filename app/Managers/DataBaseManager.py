@@ -36,6 +36,31 @@ class DataBaseManager:
             print("Database already exists.")
         return path
 
+    def get_statistics(self):
+        statistics_data = []
+
+        try:
+            connect = sqlite3.connect(self.db_path)
+
+            cursor = connect.cursor()
+            cursor.execute("SELECT time, chars, typing_speed, file_name FROM statistics")
+            rows = cursor.fetchall()
+
+            for row in rows:
+                statistics_data.append({
+                    "time": row[0],
+                    "chars": row[1],
+                    "typing_speed": row[2],
+                    "file_name": row[3]
+                })
+
+            return statistics_data
+
+        except sqlite3.Error as e:
+            print(f"Error get statistics: {e}")
+        finally:
+            connect.close()
+
     def verify_password(self):
         self
 
