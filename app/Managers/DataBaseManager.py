@@ -61,6 +61,21 @@ class DataBaseManager:
         finally:
             connect.close()
 
+    def send_statistic(self, data, chars, typing_speed, file_name, current_time):
+        try:
+            connect = sqlite3.connect(self.db_path)
+            cursor = connect.cursor()
+            cursor.execute('''
+                        INSERT INTO statistics (time, chars, typing_speed, file_name)
+                        VALUES (?, ?, ?, ?)
+                    ''', (current_time, chars, typing_speed, file_name))
+            connect.commit()
+            return {"message": "Statistics saved successfully"}
+        except sqlite3.Error as e:
+            return {"error": str(e)}
+        finally:
+            connect.close()
+
     def verify_password(self):
         self
 
