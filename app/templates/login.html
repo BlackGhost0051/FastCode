@@ -6,8 +6,15 @@
 </head>
 <body>
     <form>
-        <input type="text"/>
-        <input type="password"/>
+        <h2>Login</h2>
+
+        <label>Login:</label>
+        <input id="login" type="text"/>
+
+        <label>Password:</label>
+        <input id="password" type="password"/>
     </form>
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>
