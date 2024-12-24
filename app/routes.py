@@ -21,6 +21,28 @@ def page_not_found(e):
 def home():
     return render_template('index.html')
 
+@current_app.route('/login', methods=['GET'])
+def login_get():
+    try:
+        return render_template('/login.html'), 200
+    except Exception as e:
+        return render_template('/error.html', status_code=400, message=""), 400
+@current_app.route('/login', methods=['POST'])
+def login_post():
+    return "POST Login"
+
+@current_app.route('/register', methods=['GET'])
+def register_get():
+    try:
+        return render_template('/register.html'), 200
+    except Exception as e:
+        return render_template('/error.html', status_code=400, message=""), 400
+
+@current_app.route('/register', methods=['POST'])
+def register_post():
+    return "POST Register"
+
+
 @current_app.route('/<language>')
 def python(language):
     try:
