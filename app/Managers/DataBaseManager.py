@@ -15,6 +15,9 @@ class DataBaseManager:
                                 )
     '''
 
+    # table users id login password
+    # table user_info login time chars typing_speed file_name
+
     def __init__(self):
         self.db_path = self.db_init()
 
