@@ -15,7 +15,36 @@ class DataBaseManager:
                                 )
     '''
 
-    # table users id login password
+    """
+
+    CREATE TABLE statistics (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        chars TEXT,
+        typing_speed REAL,
+        file_name TEXT
+    );
+    
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        login TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        isAdmin BOOLEAN DEFAULT 0
+    );
+
+    CREATE TABLE user_info (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        login TEXT NOT NULL,
+        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        chars INTEGER,
+        typing_speed REAL,
+        file_name TEXT,
+        FOREIGN KEY (login) REFERENCES users(login)
+    );
+
+    """
+
+    # table users id login password isAdmin
     # table user_info login time chars typing_speed file_name
 
     def __init__(self):
