@@ -42,7 +42,9 @@ def register_get():
 
 @current_app.route('/register', methods=['POST'])
 def register_post():
-        return "POST Register"
+    data = request.get_json()
+    print("Register data: ", data)
+    return jsonify({"message": "Register successful"})
 
 
 @current_app.route('/<language>')
