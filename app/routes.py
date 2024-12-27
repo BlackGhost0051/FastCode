@@ -29,7 +29,9 @@ def login_get():
         return render_template('/error.html', status_code=400, message=""), 400
 @current_app.route('/login', methods=['POST'])
 def login_post():
-    return "POST Login"
+    data = request.get_json()
+    print("Login data: ", data)
+    return jsonify({"message": "Login successful"})
 
 @current_app.route('/register', methods=['GET'])
 def register_get():
@@ -40,7 +42,7 @@ def register_get():
 
 @current_app.route('/register', methods=['POST'])
 def register_post():
-    return "POST Register"
+        return "POST Register"
 
 
 @current_app.route('/<language>')
