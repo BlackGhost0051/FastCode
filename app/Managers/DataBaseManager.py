@@ -15,15 +15,7 @@ class DataBaseManager:
                                 )
     '''
 
-    """
-
-    CREATE TABLE statistics (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        chars TEXT,
-        typing_speed REAL,
-        file_name TEXT
-    );
+    """    
     
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,7 +24,7 @@ class DataBaseManager:
         isAdmin BOOLEAN DEFAULT 0
     );
 
-    CREATE TABLE user_info (
+    CREATE TABLE statistics (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         login TEXT NOT NULL,
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
