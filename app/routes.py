@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from datetime import datetime
-from flask import render_template, current_app, jsonify, request, Response
+from flask import render_template, current_app, jsonify, request, Response, session
 
 from app.Managers.DataBaseManager import DataBaseManager
 
