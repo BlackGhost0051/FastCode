@@ -1,6 +1,8 @@
 import os
 import sqlite3
 
+from app.Managers.CryptoManager import CryptoManager
+
 
 class DataBaseManager:
     DATABASE = 'database.db'
@@ -111,7 +113,18 @@ class DataBaseManager:
             connect.close()
 
     def loginUser(self, login: str, password: str) -> bool:
-        return False
+        try:
+
+            connect = sqlite3.connect(self.db_path)
+            cursor = connect.cursor()
+            cursor.execute(f'''SELECT password FROM users WHERE login={login};''')
+            connect.commit()
+
+            return CryptoManager.verify_password(password,"")
+        except Exception as e:
+            return False
+        finally:
+            connect.close()
 
     def addUser(self, login: str, password: str) -> bool:
         return False
