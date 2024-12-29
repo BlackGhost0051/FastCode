@@ -109,13 +109,9 @@ class DataBaseManager:
             return "Error"
         finally:
             connect.close()
-    def verify_password(self):
-        self
 
+    def loginUser(self, login: str, password: str) -> bool:
+        return False
 
-    def loginUser(self):
-        self
-
-    def registerUser(self):
-        self
-
+    def addUser(self, login: str, password: str) -> bool:
+        return False
