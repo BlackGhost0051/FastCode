@@ -53,6 +53,26 @@ FasrCode/
 └── run.py              # Entry point to run the Flask app
 ```
 
+## DataBase Structure
+```
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        login TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        isAdmin BOOLEAN DEFAULT 0
+    );
+
+    CREATE TABLE statistics (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        login TEXT NOT NULL,
+        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        chars INTEGER,
+        typing_speed REAL,
+        file_name TEXT,
+        FOREIGN KEY (login) REFERENCES users(login)
+    );
+```
+
 ## How add a new language
 
 ### Make language dir
