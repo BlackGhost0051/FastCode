@@ -30,6 +30,7 @@ def login_get():
 @current_app.route('/login', methods=['POST'])
 def login_post():
     data = request.get_json()
+    DataBaseManager.loginUser()
     print("Login data: ", data)
     return jsonify({"message": "Login successful"})
 
