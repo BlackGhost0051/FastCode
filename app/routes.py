@@ -10,7 +10,6 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
-DATABASE = 'database.db'
 
 @current_app.errorhandler(404)
 def page_not_found(e):
