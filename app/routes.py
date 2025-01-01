@@ -29,6 +29,11 @@ def login_get():
 def login_post():
     data = request.get_json()
     DataBaseManager.loginUser()
+
+    session['user_id'] = 1
+    session['username'] = "username"
+    session['logged_in'] = True
+
     print("Login data: ", data)
     return jsonify({"message": "Login successful"})
 
