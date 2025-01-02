@@ -6,6 +6,10 @@ const password_0_input = document.getElementById("password_0");
 const password_1_input = document.getElementById("password_1");
 
 register_button.addEventListener("click", () => {
+
+    // pass0 == pass1
+
+
     fetch("/register",{
         method: "POST",
         body: JSON.stringify(
