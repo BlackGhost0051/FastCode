@@ -50,15 +50,20 @@ class DataBaseManager:
             print("Database already exists.")
         return path
 
-    def get_statistics(self):
+    def get_statistics(self, login: str):
         statistics_data = []
 
         try:
             connect = sqlite3.connect(self.db_path)
-
+            connect.execute("PRAGMA foreign_keys = ON;")
             cursor = connect.cursor()
-            cursor.execute("SELECT time, chars, typing_speed, file_name FROM statistics")
+
+            cursor.execute("""
+                SELECT time, chars, typing_speed, file_name
+                FROM statistics WHERE login = ?;
+            """, (login,))
             rows = cursor.fetchall()
+
 
             for row in rows:
                 statistics_data.append({
@@ -75,14 +80,15 @@ class DataBaseManager:
         finally:
             connect.close()
 
-    def send_statistic(self, data, chars, typing_speed, file_name, current_time):
+    def send_statistic(self, login: str, chars, typing_speed, file_name, current_time):
         try:
             connect = sqlite3.connect(self.db_path)
+            connect.execute("PRAGMA foreign_keys = ON;")
             cursor = connect.cursor()
-            cursor.execute('''
-                        INSERT INTO statistics (time, chars, typing_speed, file_name)
-                        VALUES (?, ?, ?, ?)
-                    ''', (current_time, chars, typing_speed, file_name))
+            cursor.execute("""
+                            INSERT INTO statistics (login, chars, typing_speed, file_name)
+                            VALUES (?, ?, ?, ?);
+                        """, (login, chars, typing_speed, file_name))
             connect.commit()
             return {"message": "Statistics saved successfully"}
         except sqlite3.Error as e:
@@ -90,11 +96,12 @@ class DataBaseManager:
         finally:
             connect.close()
 
-    def statistics_clear(self):
+    def statistics_clear(self, login: str):
         try:
             connect = sqlite3.connect(self.db_path)
+            connect.execute("PRAGMA foreign_keys = ON;")
             cursor = connect.cursor()
-            cursor.execute('DELETE FROM statistics')
+            cursor.execute("DELETE FROM statistics WHERE login = ?;", (login,))
             connect.commit()
             return "Clear"
         except sqlite3.Error as e:
