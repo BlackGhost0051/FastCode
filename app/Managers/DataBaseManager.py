@@ -7,17 +7,7 @@ from app.Managers.CryptoManager import CryptoManager
 class DataBaseManager:
     DATABASE = 'database.db'
 
-    DATABASE_STRUCTURE = '''
-                                CREATE TABLE statistics (
-                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                    chars TEXT,
-                                    typing_speed REAL,
-                                    file_name TEXT
-                                )
-    '''
-
-    """    
+    DATABASE_STRUCTURE = """    
     
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -117,14 +107,34 @@ class DataBaseManager:
 
             connect = sqlite3.connect(self.db_path)
             cursor = connect.cursor()
-            cursor.execute(f'''SELECT password FROM users WHERE login={login};''')
+            cursor.execute('SELECT password FROM users WHERE login=?;', (login,))
             connect.commit()
 
-            return CryptoManager.verify_password(password,"")
+            result = cursor.fetchone()
+            if result:
+                stored_password = result[0]
+                return CryptoManager.verify_password(password, stored_password)
+            else:
+                return False
         except Exception as e:
             return False
         finally:
             connect.close()
 
     def addUser(self, login: str, password: str) -> bool:
-        return False
+        try:
+            hashed_password = CryptoManager.make_hash(password)
+
+            connect = sqlite3.connect(self.db_path)
+            cursor = connect.cursor()
+            cursor.execute('INSERT INTO users (login, password) VALUES (?, ?);', (login, hashed_password))
+            connect.commit()
+
+            return True
+        except sqlite3.IntegrityError:
+            return False
+        except Exception as e:
+            print(f"Error adding user: {e}")
+            return False
+        finally:
+            connect.close()
