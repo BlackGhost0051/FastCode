@@ -66,7 +66,10 @@ def statistics():
 @current_app.route('/get_statistics')
 def statistics_data():
     db_manager = DataBaseManager()
-    statistics_data =  db_manager.get_statistics()
+
+    login = "test"
+
+    statistics_data =  db_manager.get_statistics(login)
     return jsonify(statistics_data), 200
 
 
@@ -74,14 +77,13 @@ def statistics_data():
 def send_statistic():
     db_manager = DataBaseManager()
 
+    login = "test"
     data = request.get_json()
     chars = data.get('chars')
     typing_speed = data.get('typing_speed')
     file_name = data.get('file_name')
 
-    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-    message = db_manager.send_statistic(data, chars, typing_speed, file_name, current_time)
+    message = db_manager.send_statistic(login, chars, typing_speed, file_name)
     return jsonify(message), 200
 
 
@@ -89,7 +91,10 @@ def send_statistic():
 def statistics_clear():
     db_manager = DataBaseManager()
 
-    message = db_manager.statistics_clear()
+
+    login = "test"
+
+    message = db_manager.statistics_clear(login)
     return message, 200
 
 @current_app.route('/add_file', methods=['POST'])
