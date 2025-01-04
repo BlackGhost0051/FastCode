@@ -80,7 +80,7 @@ class DataBaseManager:
         finally:
             connect.close()
 
-    def send_statistic(self, login: str, chars, typing_speed, file_name, current_time):
+    def send_statistic(self, login: str, chars, typing_speed, file_name):
         try:
             connect = sqlite3.connect(self.db_path)
             connect.execute("PRAGMA foreign_keys = ON;")
