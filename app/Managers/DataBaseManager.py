@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import hashlib
 
 from app.Managers.CryptoManager import CryptoManager
 
