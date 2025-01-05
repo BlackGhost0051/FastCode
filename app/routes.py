@@ -27,15 +27,29 @@ def login_get():
         return render_template('/error.html', status_code=400, message=""), 400
 @current_app.route('/login', methods=['POST'])
 def login_post():
-    data = request.get_json()
-    DataBaseManager.loginUser()
+    try:
+        data = request.get_json()
 
-    session['user_id'] = 1
-    session['username'] = "username"
-    session['logged_in'] = True
+        login = data.get('login')
+        password = data.get('password')
 
-    print("Login data: ", data)
-    return jsonify({"message": "Login successful"})
+        if not login or not password:
+            return jsonify({"error": "Missing login or password"}), 400
+
+        db_manager = DataBaseManager()
+
+        is_authenticated = db_manager.loginUser(login, password)
+
+        if is_authenticated:
+            session['user_id'] = 1
+            session['username'] = login
+            session['logged_in'] = True
+            return jsonify({"message": "Login successful"}), 200
+        else:
+            return jsonify({"error": "Invalid login or password"}), 401
+    except Exception as e:
+        print(f"Error in login_post: {e}")
+        return jsonify({"error": "An error occurred"}), 500
 
 @current_app.route('/register', methods=['GET'])
 def register_get():
@@ -47,8 +61,24 @@ def register_get():
 @current_app.route('/register', methods=['POST'])
 def register_post():
     data = request.get_json()
-    print("Register data: ", data)
-    return jsonify({"message": "Register successful"})
+
+    login = data.get('login')
+    password = data.get('password')
+
+    if not login or not password:
+        return jsonify({"error": "Missing login or password"}), 400
+
+    db_manager = DataBaseManager()
+
+    try:
+        is_registered = db_manager.addUser(login, password)
+        if is_registered:
+            return jsonify({"message": "Register successful", "success": True}), 200
+        else:
+            return jsonify({"error": "User already exists", "success": False}), 409
+    except Exception as e:
+        print(f"Error in register_post: {e}")
+        return jsonify({"error": "Internal server error", "success": False}), 500
 
 
 @current_app.route('/<language>')
