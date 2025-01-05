@@ -6,17 +6,28 @@ const password_0_input = document.getElementById("password_0");
 const password_1_input = document.getElementById("password_1");
 
 register_button.addEventListener("click", () => {
+    const login = login_input.value;
+    const password0 = password_0_input.value;
+    const password1 = password_1_input.value;
 
-    // pass0 == pass1
+    if (!login || !password0 || !password1) {
+        alert("All fields are required!");
+        return;
+    }
+
+    if (password0 !== password1) {
+        alert("Passwords do not match!");
+        return;
+    }
+
 
 
     fetch("/register",{
         method: "POST",
         body: JSON.stringify(
             {
-            login: login_input.value,
-            password_0: password_0_input.value,
-            password_1: password_1_input.value
+            login: login,
+            password: password0,
             }
         ),
         headers:{
