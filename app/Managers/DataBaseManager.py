@@ -133,12 +133,8 @@ class DataBaseManager:
         try:
             hashed_password = CryptoManager.make_hash(password)
 
-            connect = sqlite3.connect(self.db_path)
-            cursor = connect.cursor()
-            cursor.execute('INSERT INTO users (login, password) VALUES (?, ?);', (login, hashed_password))
-            connect.commit()
 
-            return True
+            return False
         except sqlite3.IntegrityError:
             return False
         except Exception as e:
