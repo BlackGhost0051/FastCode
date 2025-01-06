@@ -141,4 +141,4 @@ class DataBaseManager:
             print(f"Error adding user: {e}")
             return False
         finally:
-            connect.close()
+            #connect.close()
