@@ -140,5 +140,5 @@ class DataBaseManager:
         except Exception as e:
             print(f"Error adding user: {e}")
             return False
-        finally:
+        #finally:
             #connect.close()
