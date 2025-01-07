@@ -133,6 +133,10 @@ class DataBaseManager:
         try:
             hashed_password = CryptoManager.make_hash(password)
 
+            connect = sqlite3.connect(self.db_path)
+            cursor = connect.cursor()
+
+            connect.commit()
 
             return False
         except sqlite3.IntegrityError:
@@ -140,5 +144,5 @@ class DataBaseManager:
         except Exception as e:
             print(f"Error adding user: {e}")
             return False
-        #finally:
-            #connect.close()
+        finally:
+            connect.close()
