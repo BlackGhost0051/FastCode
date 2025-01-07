@@ -136,6 +136,8 @@ class DataBaseManager:
             connect = sqlite3.connect(self.db_path)
             cursor = connect.cursor()
 
+            #cursor.execute('SELECT password FROM users WHERE login=?;', (login,))
+
             connect.commit()
 
             return False
