@@ -158,3 +158,9 @@ class DataBaseManager:
             return False
         finally:
             connect.close()
+
+    def changePassword(self, login:str, password:str ,new_password: str) -> bool:
+        try:
+            return True
+        except Exception as e:
+            return False
