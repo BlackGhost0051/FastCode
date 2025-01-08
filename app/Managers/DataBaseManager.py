@@ -134,13 +134,23 @@ class DataBaseManager:
             hashed_password = CryptoManager.make_hash(password)
 
             connect = sqlite3.connect(self.db_path)
+            connect.execute("PRAGMA foreign_keys = ON;")
             cursor = connect.cursor()
 
-            #cursor.execute('SELECT password FROM users WHERE login=?;', (login,))
+            cursor.execute('SELECT id FROM users WHERE login=?;', (login,))
+            user_exists = cursor.fetchone()
 
+            if user_exists:
+                print("User already exists.")
+                return False
+
+            cursor.execute("""
+                            INSERT INTO users (login, password)
+                            VALUES (?, ?);
+                        """, (login, hashed_password))
             connect.commit()
 
-            return False
+            return True
         except sqlite3.IntegrityError:
             return False
         except Exception as e:
