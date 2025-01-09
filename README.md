@@ -115,8 +115,6 @@ chart.js
 
 $$
 
-Login
-Register
 Statistic
 Players VS
 Single typing
