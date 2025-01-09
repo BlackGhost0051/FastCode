@@ -161,6 +161,15 @@ class DataBaseManager:
 
     def changePassword(self, login: str, password: str, new_password: str) -> bool:
         try:
+
+            connect = sqlite3.connect(self.db_path)
+            coursor = connect.cursor()
+
+            coursor.execute()
+            connect.commit()
+
             return True
         except Exception as e:
             return False
+        finally:
+            connect.close()
