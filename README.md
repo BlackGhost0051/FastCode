@@ -118,3 +118,10 @@ $$
 Statistic
 Players VS
 Single typing
+
+
+NEED ADD
+
+js
+ts
+c++
