@@ -116,6 +116,8 @@ chart.js
 #### Plan
 $$
 
+Global Code
+Lieder Board
 Statistic
 Players VS
 Single typing
