@@ -163,9 +163,14 @@ class DataBaseManager:
         try:
 
             connect = sqlite3.connect(self.db_path)
-            coursor = connect.cursor()
+            cursor = connect.cursor()
 
-            coursor.execute()
+            cursor.execute('SELECT id FROM users WHERE login=?;', (login,))
+            user_exists = cursor.fetchone()
+
+            if user_exists:
+                pass
+
             connect.commit()
 
             return True
