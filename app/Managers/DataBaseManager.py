@@ -8,8 +8,8 @@ from app.Managers.CryptoManager import CryptoManager
 class DataBaseManager:
     DATABASE = 'database.db'
 
-    DATABASE_STRUCTURE = """    
-    
+    DATABASE_STRUCTURE = """
+
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         login TEXT NOT NULL UNIQUE,
