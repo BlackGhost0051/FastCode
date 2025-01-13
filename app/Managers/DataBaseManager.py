@@ -8,26 +8,27 @@ from app.Managers.CryptoManager import CryptoManager
 class DataBaseManager:
     DATABASE = 'database.db'
 
-    DATABASE_STRUCTURE = """
-
-    CREATE TABLE users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        login TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        isAdmin BOOLEAN DEFAULT 0
-    );
-
-    CREATE TABLE statistics (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        login TEXT NOT NULL,
-        time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        chars INTEGER,
-        typing_speed REAL,
-        file_name TEXT,
-        FOREIGN KEY (login) REFERENCES users(login)
-    );
-
-    """
+    DATABASE_STRUCTURE = [
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            login TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            isAdmin BOOLEAN DEFAULT 0
+        );
+        """,
+        """
+        CREATE TABLE IF NOT EXISTS statistics (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            login TEXT NOT NULL,
+            time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            chars INTEGER,
+            typing_speed REAL,
+            file_name TEXT,
+            FOREIGN KEY (login) REFERENCES users(login)
+        );
+        """
+    ]
 
 
     def __init__(self):
@@ -40,7 +41,11 @@ class DataBaseManager:
             try:
                 connect = sqlite3.connect(path)
                 cursor = connect.cursor()
-                cursor.execute(self.DATABASE_STRUCTURE)
+
+                for table in self.DATABASE_STRUCTURE:
+                    cursor.execute(table)
+
+                # cursor.execute(self.DATABASE_STRUCTURE)
                 connect.commit()
                 print("Database and table created successfully.")
             except sqlite3.Error as e:
