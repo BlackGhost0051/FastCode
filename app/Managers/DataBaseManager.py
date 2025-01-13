@@ -160,20 +160,28 @@ class DataBaseManager:
             connect.close()
 
     def changePassword(self, login: str, password: str, new_password: str) -> bool:
-        try:
+        crypto_manager = CryptoManager()
 
+        try:
             connect = sqlite3.connect(self.db_path)
             cursor = connect.cursor()
 
-            cursor.execute('SELECT id FROM users WHERE login=?;', (login,))
-            user_exists = cursor.fetchone()
+            cursor.execute('SELECT id, password FROM users WHERE login=?;', (login,))
+            user = cursor.fetchone()
 
-            if user_exists:
-                pass
+            if user:
+                user_id, stored_hashed_password = user
 
-            connect.commit()
+                if crypto_manager.verify_password(password, stored_hashed_password):
+                    new_hashed_password = crypto_manager.make_hash(new_password)
 
-            return True
+                    cursor.execute('UPDATE users SET password=? WHERE id=?;', (new_hashed_password, user_id))
+                    connect.commit()
+                    return True
+                else:
+                    return False
+
+            return False
         except Exception as e:
             return False
         finally:
