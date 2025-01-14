@@ -112,6 +112,12 @@ app/static/logo
 ## Statistic
 chart.js
 
+make users statistic
+make all users statistics
+make battle statistic
+
+
+
 
 #### Plan
 $$
