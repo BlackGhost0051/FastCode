@@ -191,3 +191,6 @@ class DataBaseManager:
             return False
         finally:
             connect.close()
+
+        def get_all_users_statistics() -> str:
+            pass
