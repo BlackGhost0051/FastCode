@@ -121,7 +121,7 @@ Lieder Board
 Statistic
 Players VS
 Single typing
-
+make xss detect
 
 NEED ADD
 
