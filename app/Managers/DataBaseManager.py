@@ -200,11 +200,11 @@ class DataBaseManager:
             connect.execute("PRAGMA foreign_keys = ON;")
             cursor = connect.cursor()
 
-            # cursor.execute("""
-            #             SELECT users.login, statistics.time, statistics.chars, statistics.typing_speed, statistics.file_name
-            #             FROM users
-            #             LEFT JOIN statistics ON users.login = statistics.login;
-            #         """)
+            cursor.execute("""
+                        SELECT users.login, statistics.time, statistics.chars, statistics.typing_speed, statistics.file_name
+                        FROM users
+                        LEFT JOIN statistics ON users.login = statistics.login;
+                    """)
             rows = cursor.fetchall()
 
             for row in rows:
