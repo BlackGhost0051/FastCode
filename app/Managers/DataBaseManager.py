@@ -192,5 +192,32 @@ class DataBaseManager:
         finally:
             connect.close()
 
-        def get_all_users_statistics() -> str:
-            pass
+    def get_all_users_statistics(self):
+        all_statistics = []
+
+        try:
+            connect = sqlite3.connect(self.db_path)
+            connect.execute("PRAGMA foreign_keys = ON;")
+            cursor = connect.cursor()
+
+            # cursor.execute("""
+            #             SELECT users.login, statistics.time, statistics.chars, statistics.typing_speed, statistics.file_name
+            #             FROM users
+            #             LEFT JOIN statistics ON users.login = statistics.login;
+            #         """)
+            rows = cursor.fetchall()
+
+            for row in rows:
+                all_statistics.append({
+                    "login": row[0],
+                    "time": row[1],
+                    "chars": row[2],
+                    "typing_speed": row[3],
+                    "file_name": row[4]
+                })
+
+            return all_statistics
+        except Exception as e:
+            return []
+        finally:
+            connect.close()
