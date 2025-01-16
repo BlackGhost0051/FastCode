@@ -80,6 +80,9 @@ def register_post():
         print(f"Error in register_post: {e}")
         return jsonify({"error": "Internal server error", "success": False}), 500
 
+@current_app.route('/change_password', method=['POST'])
+def change_password():
+    pass
 
 @current_app.route('/<language>')
 def python(language):
