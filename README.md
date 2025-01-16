@@ -120,7 +120,6 @@ make battle statistic
 
 
 #### Plan
-$$
 
 Global Code
 Lieder Board
