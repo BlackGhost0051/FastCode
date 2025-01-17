@@ -73,10 +73,6 @@ FasrCode/
     );
 ```
 
-```
-  id login password isAdmin
-  id login time chars typing_speed file_name
-```
 
 ## How add a new language
 
