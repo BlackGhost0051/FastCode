@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form>
-        <h2>Register</h2>
+<body class="bg-dark text-white">
 
-        <label>Login:</label>
-        <input id="login" type="text"/>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <form class="bg-secondary p-4 rounded shadow-lg w-100" style="max-width: 400px;">
+            <h2 class="text-center mb-4">Register</h2>
 
-        <label>Password:</label>
-        <input id="password_0" type="password"/>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input id="login" type="text" class="form-control" placeholder="Enter login" required>
+            </div>
 
-        <label>Password:</label>
-        <input id="password_1" type="password"/>
+            <div class="form-group">
+                <label for="password_0">Password</label>
+                <input id="password_0" type="password" class="form-control" placeholder="Enter password" required>
+            </div>
 
-        <input id="register_button" type="button" value="Register">
-    </form>
+            <div class="form-group">
+                <label for="password_1">Confirm Password</label>
+                <input id="password_1" type="password" class="form-control" placeholder="Confirm password" required>
+            </div>
+
+            <button id="register_button" type="button" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
 
 <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>

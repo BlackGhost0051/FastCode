@@ -3,19 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form>
-        <h2>Login</h2>
+<body class="bg-dark text-white">
 
-        <label>Login:</label>
-        <input id="login" type="text"/>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/" id="logo">&#128511; Fast Code</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statistics">Statistics</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <label>Password:</label>
-        <input id="password" type="password"/>
 
-        <input id="login_button" type="button" value="Login">
-    </form>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <form class="bg-secondary p-4 rounded shadow-lg w-100" style="max-width: 400px;">
+            <h2 class="text-center mb-4">Login</h2>
+
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input id="login" type="text" class="form-control" placeholder="Enter login" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control" placeholder="Enter password" required>
+            </div>
+
+            <button id="login_button" type="button" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
 
 <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
