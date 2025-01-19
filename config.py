@@ -1,3 +1,3 @@
 class Config:
     DEBUG = True
-    SECRET_KEY = 'test_key'
+    SECRET_KEY = 'tango#1'
