@@ -134,6 +134,28 @@ class DataBaseManager:
         finally:
             connect.close()
 
+
+    # SQL Injection
+    # def loginUser(self, login: str, password: str) -> bool:
+    #     try:
+    #         connect = sqlite3.connect(self.db_path)
+    #         cursor = connect.cursor()
+    #
+    #         command = f"SELECT 1 FROM users WHERE login='{login}' AND password='{password}';"
+    #         print(command)
+    #         cursor.execute(command)
+    #         result = cursor.fetchone()
+    #
+    #         if result:
+    #             return True
+    #         else:
+    #             return False
+    #     except Exception as e:
+    #         print(f"Error during login: {e}")
+    #         return False
+    #     finally:
+    #         connect.close()
+
     def addUser(self, login: str, password: str) -> bool:
         try:
             hashed_password = CryptoManager.make_hash(password)

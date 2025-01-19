@@ -1,17 +1,20 @@
 import hashlib
+import os
 
 class CryptoManager:
     def __init__(self):
-        self
+        pass
 
-    def make_hash(self, password: str, salt: str = None) -> str:
+    @staticmethod
+    def make_hash(password: str, salt: str = None) -> str:
         if not salt:
             salt = hashlib.sha3_512(os.urandom(32)).hexdigest()[:64]
         salted_password = salt + password
         hashed = hashlib.sha3_512(salted_password.encode()).hexdigest()
         return f"{salt}${hashed}"
 
-    def verify_password(self, password: str, hashed_password: str) -> bool:
+    @staticmethod
+    def verify_password(password: str, hashed_password: str) -> bool:
         try:
             salt, stored_hash = hashed_password.split('$')
             salted_password = salt + password

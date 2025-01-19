@@ -1,8 +1,10 @@
 import os
 from datetime import datetime
-from flask import render_template, current_app, jsonify, request, Response, session
+from flask import render_template, current_app, jsonify, request, Response, session, make_response
+from markupsafe import Markup
 
 from app.Managers.DataBaseManager import DataBaseManager
+from app.Managers.JWTManager import JWTManager
 
 EXTENSIONS_PATH = {
     '.py': 'python',
@@ -17,7 +19,21 @@ def page_not_found(e):
 
 @current_app.route('/')
 def home():
-    return render_template('index.html')
+    token = request.cookies.get('token')
+
+    if not token:
+        return render_template('index.html', login="LOGIN")
+
+    result = JWTManager.verify_token(token)
+    if "error" in result:
+        return jsonify(result)
+
+    username = result["username"]
+
+
+    return render_template('index.html', login=username)
+    # return render_template('index.html', login=Markup(username)) # XSS
+
 
 @current_app.route('/login', methods=['GET'])
 def login_get():
@@ -29,7 +45,6 @@ def login_get():
 def login_post():
     try:
         data = request.get_json()
-
         login = data.get('login')
         password = data.get('password')
 
@@ -37,14 +52,25 @@ def login_post():
             return jsonify({"error": "Missing login or password"}), 400
 
         db_manager = DataBaseManager()
+        user_id = db_manager.loginUser(login, password)
 
-        is_authenticated = db_manager.loginUser(login, password)
+        if user_id:
+            token = JWTManager.generate_token(user_id=user_id, username=login)
 
-        if is_authenticated:
-            session['user_id'] = 1
-            session['username'] = login
-            session['logged_in'] = True
-            return jsonify({"message": "Login successful"}), 200
+            response = make_response(
+                jsonify({"message": "Login successful"})
+            )
+
+            response.set_cookie(
+                'token',
+                token,
+                max_age=3600,
+                secure=True,
+                httponly=True,
+                samesite='Lax'
+            )
+
+            return response, 200
         else:
             return jsonify({"error": "Invalid login or password"}), 401
     except Exception as e:
@@ -80,7 +106,7 @@ def register_post():
         print(f"Error in register_post: {e}")
         return jsonify({"error": "Internal server error", "success": False}), 500
 
-@current_app.route('/change_password', method=['POST'])
+@current_app.route('/change_password', methods=['POST'])
 def change_password():
     pass
 
