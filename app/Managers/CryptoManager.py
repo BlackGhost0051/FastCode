@@ -22,4 +22,3 @@ class CryptoManager:
             return computed_hash == stored_hash
         except ValueError:
             raise ValueError("Invalid hashed password format")
-
