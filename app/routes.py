@@ -35,6 +35,10 @@ def home():
     # return render_template('index.html', login=Markup(username)) # XSS
 
 
+@current_app.route('/profile', methods=['GET'])
+def profile():
+    return render_template('/profile.html')
+
 @current_app.route('/login', methods=['GET'])
 def login_get():
     try:
