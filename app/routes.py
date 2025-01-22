@@ -22,7 +22,7 @@ def home():
     token = request.cookies.get('token')
 
     if not token:
-        return render_template('index.html', login="LOGIN")
+        return render_template('index.html', login="")
 
     result = JWTManager.verify_token(token)
     if "error" in result:
@@ -35,9 +35,9 @@ def home():
     # return render_template('index.html', login=Markup(username)) # XSS
 
 
-@current_app.route('/profile', methods=['GET'])
-def profile():
-    return render_template('/profile.html')
+@current_app.route('/profile/<login>', methods=['GET'])
+def profile(login):
+    return render_template('/profile.html', login=login)
 
 @current_app.route('/login', methods=['GET'])
 def login_get():
