@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>{{login}}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
+<!--     extends "nav-bar.html" -->
+
     <main>
+        <div class="container">
+            <div class="w-50">
+                <img class="img-fluid rounded-circle d-block mx-auto"
+                     style="width: 20em; height: 20em;"
+                     src="https://avatars.githubusercontent.com/u/147267828?v=4"
+                     alt="Profile Image">
+
+                <div class="text-center">{{ login }}</div>
+            </div>
+
+            <div class="bg-dark w-50">
+                <div>
+<!--                    Detail info-->
+                </div>
+                <div>
+                    <div>
+<!--                        links-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div>
-            <div>
-                <img src="" alt="">
-                <div>{{ login }}</div>
-            </div>
-
-            <div>
-                <div>
-
-                </div>
-                <div>
-
-                </div>
-            </div>
+<!--            statistic-->
         </div>
 
         <div>
