@@ -7,17 +7,39 @@
 </head>
 <body>
 
-<!--     extends "nav-bar.html" -->
+<!--extends "nav-bar.html"-->
 
-    <main>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" id="logo">&#128511; Fast Code</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statistics">Statistics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <main class="m-3 bg-dark text-white">
         <div class="container">
-            <div class="w-50">
+            <div class="w-50 p-3">
                 <img class="img-fluid rounded-circle d-block mx-auto"
                      style="width: 20em; height: 20em;"
                      src="https://avatars.githubusercontent.com/u/147267828?v=4"
                      alt="Profile Image">
 
-                <div class="text-center">{{ login }}</div>
+                <div class="text-center p-2" >{{ login }}</div>
             </div>
 
             <div class="bg-dark w-50">
