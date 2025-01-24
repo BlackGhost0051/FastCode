@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import render_template, current_app, jsonify, request, Response, session, make_response
+from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect
 from markupsafe import Markup
 
 from app.Managers.DataBaseManager import DataBaseManager
@@ -12,6 +12,14 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
+def verify_token( token:str ) -> bool:
+    if not token:
+        return False
+    if "error" in JWTManager().verify_token(token):
+        return False
+    return True
+
+
 
 @current_app.errorhandler(404)
 def page_not_found(e):
@@ -21,13 +29,10 @@ def page_not_found(e):
 def home():
     token = request.cookies.get('token')
 
-    if not token:
-        return render_template('index.html', login="")
+    if not verify_token(token):
+        return redirect(url_for('login'))
 
     result = JWTManager.verify_token(token)
-    if "error" in result:
-        return jsonify(result)
-
     username = result["username"]
 
 
@@ -39,47 +44,47 @@ def home():
 def profile(login):
     return render_template('/profile.html', login=login)
 
-@current_app.route('/login', methods=['GET'])
-def login_get():
-    try:
-        return render_template('/login.html'), 200
-    except Exception as e:
-        return render_template('/error.html', status_code=400, message=""), 400
-@current_app.route('/login', methods=['POST'])
-def login_post():
-    try:
-        data = request.get_json()
-        login = data.get('login')
-        password = data.get('password')
+@current_app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        try:
+            return render_template('/login.html'), 200
+        except Exception as e:
+            return render_template('/error.html', status_code=400, message=""), 400
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            login = data.get('login')
+            password = data.get('password')
 
-        if not login or not password:
-            return jsonify({"error": "Missing login or password"}), 400
+            if not login or not password:
+                return jsonify({"error": "Missing login or password"}), 400
 
-        db_manager = DataBaseManager()
-        user_id = db_manager.loginUser(login, password)
+            db_manager = DataBaseManager()
+            user_id = db_manager.loginUser(login, password)
 
-        if user_id:
-            token = JWTManager.generate_token(user_id=user_id, username=login)
+            if user_id:
+                token = JWTManager.generate_token(user_id=user_id, username=login)
 
-            response = make_response(
-                jsonify({"message": "Login successful"})
-            )
+                response = make_response(
+                    jsonify({"message": "Login successful"})
+                )
 
-            response.set_cookie(
-                'token',
-                token,
-                max_age=3600,
-                secure=True,
-                httponly=True,
-                samesite='Lax'
-            )
+                response.set_cookie(
+                    'token',
+                    token,
+                    max_age=3600,
+                    secure=True,
+                    httponly=True,
+                    samesite='Lax'
+                )
 
-            return response, 200
-        else:
-            return jsonify({"error": "Invalid login or password"}), 401
-    except Exception as e:
-        print(f"Error in login_post: {e}")
-        return jsonify({"error": "An error occurred"}), 500
+                return response, 200
+            else:
+                return jsonify({"error": "Invalid login or password"}), 401
+        except Exception as e:
+            print(f"Error in login_post: {e}")
+            return jsonify({"error": "An error occurred"}), 500
 
 @current_app.route('/register', methods=['GET'])
 def register_get():
