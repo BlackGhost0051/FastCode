@@ -23,11 +23,14 @@ login_button.addEventListener("click", () => {
     .then((response) => { 
         if (!response.ok){
             console.error(`HTTP error! Status: ${response.status}`);
+        } else{
+
         }
         return response.json();
     })
     .then((data) => {
         console.log(data)
+        window.location.href = "/";
     })
     .catch((error) => {
         console.error("Error occurred:", error);
