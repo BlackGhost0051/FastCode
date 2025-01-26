@@ -20,8 +20,6 @@ register_button.addEventListener("click", () => {
         return;
     }
 
-
-
     fetch("/register",{
         method: "POST",
         body: JSON.stringify(
@@ -42,6 +40,7 @@ register_button.addEventListener("click", () => {
     })
     .then((data) => {
         console.log(data)
+        window.location.href = '/login';
     })
     .catch((error) => {
         console.error("Error occurred:", error);
