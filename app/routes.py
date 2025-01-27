@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect
-from markupsafe import Markup
 
 from app.Managers.DataBaseManager import DataBaseManager
 from app.Managers.JWTManager import JWTManager
@@ -37,7 +36,6 @@ def home():
 
 
     return render_template('index.html', login=username)
-    # return render_template('index.html', login=Markup(username)) # XSS
 
 
 @current_app.route('/profile/<login>', methods=['GET'])
