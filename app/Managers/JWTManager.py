@@ -14,8 +14,7 @@ class JWTManager:
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in),
                 "iat": datetime.datetime.utcnow()
             }
-            secret_key = Config.SECRET_KEY
-            token = jwt.encode(payload, secret_key, algorithm="HS256")
+            token = jwt.encode(payload, Config.SECRET_KEY, algorithm="HS256")
             return token
         except Exception as e:
             raise ValueError(f"Error generating token: {e}")
@@ -23,8 +22,7 @@ class JWTManager:
     @staticmethod
     def verify_token(token):
         try:
-            secret_key = Config.SECRET_KEY
-            decoded_payload = jwt.decode(token, secret_key, algorithms=["HS256"])
+            decoded_payload = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
             return decoded_payload
         except jwt.ExpiredSignatureError:
             return {"error": "Token has expired"}
