@@ -28,3 +28,7 @@ class JWTManager:
             return {"error": "Token has expired"}
         except jwt.InvalidTokenError:
             return {"error": "Invalid token"}
+
+    @staticmethod
+    def verify_token_bool(token: str) -> bool:
+        pass
