@@ -17,3 +17,6 @@ class LanguagesManager:
 
     def create_language_folder(self):
         pass
+
+    def verify_file(self, filename):
+        pass
