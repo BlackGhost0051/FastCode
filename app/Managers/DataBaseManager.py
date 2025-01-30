@@ -36,7 +36,7 @@ class DataBaseManager:
 
     def db_init(self):
         path = os.path.join(os.path.dirname(__file__)) + "/../" + self.DATABASE
-        print(path)
+        print("DataBaseManager | ",path)
         if not os.path.exists(path):
             try:
                 connect = sqlite3.connect(path)
