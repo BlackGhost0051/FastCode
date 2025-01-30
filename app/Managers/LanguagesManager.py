@@ -9,10 +9,9 @@ EXTENSIONS_PATH = {
 
 
 class LanguagesManager:
-
-
     def __init__(self):
-        pass
+        path = os.path.join(os.path.dirname(__file__))
+        print(path)
     # verify languages folders by list
 
     def create_language_folder(self):
