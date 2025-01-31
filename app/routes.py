@@ -4,6 +4,7 @@ from flask import render_template, current_app, jsonify, request, Response, sess
 
 from app.Managers.DataBaseManager import DataBaseManager
 from app.Managers.JWTManager import JWTManager
+from app.Managers.LanguagesManager import LanguagesManager
 
 EXTENSIONS_PATH = {
     '.py': 'python',
@@ -26,6 +27,7 @@ def page_not_found(e):
 
 @current_app.route('/')
 def home():
+    languagesManager = LanguagesManager()
     token = request.cookies.get('token')
 
     if not verify_token(token):
