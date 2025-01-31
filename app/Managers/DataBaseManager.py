@@ -47,13 +47,13 @@ class DataBaseManager:
 
                 # cursor.execute(self.DATABASE_STRUCTURE)
                 connect.commit()
-                print("Database and table created successfully.")
+                print("DataBaseManager | Database and table created successfully.")
             except sqlite3.Error as e:
-                print(f"Error creating database: {e}")
+                print(f"DataBaseManager | Error creating database: {e}")
             finally:
                 connect.close()
         else:
-            print("Database already exists.")
+            print("DataBaseManager | Database already exists.")
         return path
 
     def get_statistics(self, login: str):
@@ -82,7 +82,7 @@ class DataBaseManager:
             return statistics_data
 
         except sqlite3.Error as e:
-            print(f"Error get statistics: {e}")
+            print(f"DataBaseManager | Error get statistics: {e}")
         finally:
             connect.close()
 
