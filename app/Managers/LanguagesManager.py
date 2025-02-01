@@ -28,3 +28,9 @@ class LanguagesManager:
 
     def verify_file(self, filename):
         pass
+
+    def add_file(self, filename):
+        pass
+
+    def remove_file(self, filename):
+        pass
