@@ -29,8 +29,23 @@ class LanguagesManager:
     def verify_file(self, filename):
         pass
 
-    def add_file(self, filename):
-        pass
+    def add_file(self, file):
+
+        if file.filename == '':
+            pass
+
+        file_extension = os.path.splitext(file.filename)[1]
+        file_path = os.path.join(current_app.root_path, 'static', 'languages', EXTENSIONS_PATH[file_extension], file.filename)
+
+        if os.path.exists(file_path):
+            pass
+        else:
+            try:
+                file.save(file_path)
+            except Exception as e:
+                pass
+
+
 
     def remove_file(self, filename):
         pass
