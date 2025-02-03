@@ -58,3 +58,6 @@ class LanguagesManager:
                 pass
         else:
             pass
+
+    def get_file(self, language, filename):
+        pass
