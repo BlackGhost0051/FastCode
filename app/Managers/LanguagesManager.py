@@ -47,5 +47,14 @@ class LanguagesManager:
 
 
 
-    def remove_file(self, filename):
-        pass
+    def remove_file(self, language, filename):
+        file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + filename)
+
+        if os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+                print(f"File '{file_path}' deleted.")
+            except Exception as e:
+                pass
+        else:
+            pass
