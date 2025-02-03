@@ -60,4 +60,14 @@ class LanguagesManager:
             pass
 
     def get_file(self, language, filename):
-        pass
+        file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + filename)
+
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, 'r') as file:
+                    code = file.read()
+                pass
+            except Exception as e:
+                pass
+        else:
+            pass
