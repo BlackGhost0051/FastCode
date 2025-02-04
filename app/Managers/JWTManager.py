@@ -20,15 +20,27 @@ class JWTManager:
             raise ValueError(f"Error generating token: {e}")
 
     @staticmethod
-    def verify_token(token):
+    def get_token_info(token):
         try:
             decoded_payload = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
             return decoded_payload
         except jwt.ExpiredSignatureError:
             return {"error": "Token has expired"}
+        except jwt.DecodeError:
+            return {"error": "Token decode error"}
         except jwt.InvalidTokenError:
             return {"error": "Invalid token"}
+        except Exception as e:
+            return {"error": f"Error getting token: {e}"}
 
     @staticmethod
-    def verify_token_bool(token: str) -> bool:
-        pass
+    def verify_token(token) -> bool:
+        if not token:
+            return False
+
+        if token is None:
+            return False
+
+        if "error" in JWTManager.get_token_info(token):
+            return False
+        return True
