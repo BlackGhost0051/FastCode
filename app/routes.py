@@ -12,12 +12,6 @@ EXTENSIONS_PATH = {
     '.c': 'c'
 }
 
-def verify_token( token:str ) -> bool:
-    if not token:
-        return False
-    if "error" in JWTManager().verify_token(token):
-        return False
-    return True
 
 
 
@@ -27,15 +21,16 @@ def page_not_found(e):
 
 @current_app.route('/')
 def home():
-    languagesManager = LanguagesManager()
+    # languagesManager = LanguagesManager()
     token = request.cookies.get('token')
+    print(token)
 
-    if not verify_token(token):
+    if not JWTManager.verify_token(token):
         return redirect(url_for('login'))
 
-    result = JWTManager.verify_token(token)
-    username = result["username"]
 
+    result = JWTManager.get_token_info(token)
+    username = result["username"]
 
     return render_template('index.html', login=username)
 
