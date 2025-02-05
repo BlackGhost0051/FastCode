@@ -1,10 +1,8 @@
 import os
-from datetime import datetime
 from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect
 
 from app.Managers.DataBaseManager import DataBaseManager
 from app.Managers.JWTManager import JWTManager
-from app.Managers.LanguagesManager import LanguagesManager
 
 EXTENSIONS_PATH = {
     '.py': 'python',
@@ -23,8 +21,6 @@ def page_not_found(e):
 def home():
     # languagesManager = LanguagesManager()
     token = request.cookies.get('token')
-    print(token)
-
     if not JWTManager.verify_token(token):
         return redirect(url_for('login'))
 
@@ -112,10 +108,16 @@ def register_post():
 
 @current_app.route('/change_password', methods=['POST'])
 def change_password():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
     pass
 
 @current_app.route('/<language>')
 def python(language):
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
     try:
         return render_template('/language.html', language=language)
     except Exception as e:
@@ -124,10 +126,16 @@ def python(language):
 
 @current_app.route('/statistics')
 def statistics():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
     return render_template('statistics.html'), 200
 
 @current_app.route('/get_statistics')
 def statistics_data():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
     db_manager = DataBaseManager()
 
     login = "test"
@@ -138,6 +146,10 @@ def statistics_data():
 
 @current_app.route('/send_statistic', methods=['POST'])
 def send_statistic():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     db_manager = DataBaseManager()
 
     login = "test"
@@ -152,6 +164,10 @@ def send_statistic():
 
 @current_app.route('/statistics_clear')
 def statistics_clear():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     db_manager = DataBaseManager()
 
 
@@ -162,6 +178,10 @@ def statistics_clear():
 
 @current_app.route('/add_file', methods=['POST'])
 def edd_file():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     file = request.files['file']
     if file.filename == '':
         return render_template('/error.html', status_code=400, message="No selected file"), 400
@@ -181,6 +201,10 @@ def edd_file():
 
 @current_app.route('/<language>/remove_file/<file_name>', methods=['POST'])
 def remove_file(language ,file_name):
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + file_name)
     print(file_path)
 
@@ -195,6 +219,10 @@ def remove_file(language ,file_name):
 
 @current_app.route('/<language>/get_code/<file_name>')
 def get_file(language, file_name):
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     file_path = os.path.join(current_app.root_path + "/static/languages/" + language + "/" + file_name)
 
     if os.path.exists(file_path):
@@ -210,6 +238,10 @@ def get_file(language, file_name):
 
 @current_app.route('/typing', methods=['GET'])
 def typing():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     file = request.args.get('file')
     language = request.args.get('language')
 
@@ -220,6 +252,10 @@ def typing():
 
 @current_app.route('/<language>/list')
 def send_list(language):
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     language_folder = os.path.join(current_app.root_path + '/static/languages/' + language)
     try:
         files = os.listdir(language_folder)
@@ -229,6 +265,10 @@ def send_list(language):
 
 @current_app.route('/languages_list')
 def languages_list():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
     try:
         return jsonify(EXTENSIONS_PATH), 200
     except Exception as e:
