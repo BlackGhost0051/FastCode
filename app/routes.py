@@ -1,5 +1,6 @@
 import os
-from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect
+from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect, \
+    send_from_directory
 
 from app.Managers.DataBaseManager import DataBaseManager
 from app.Managers.JWTManager import JWTManager
@@ -17,6 +18,28 @@ EXTENSIONS_PATH = {
 def page_not_found(e):
     return render_template('/error.html', status_code=404, message=str(e)), 404
 
+@current_app.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt', mimetype='text/plain')
+
+@current_app.route('/admin')
+def admin():
+    token = request.cookies.get('token')
+    if not JWTManager.verify_token(token):
+        return redirect(url_for('login'))
+
+    result = JWTManager.get_token_info(token)
+
+    login = result["login"]
+
+    database_manager = DataBaseManager()
+    isAdmin = database_manager.isAdmin(login)
+
+    if not isAdmin:
+        return page_not_found(401)
+
+    return "Admin page"
+
 @current_app.route('/')
 def home():
     # languagesManager = LanguagesManager()
@@ -26,9 +49,9 @@ def home():
 
 
     result = JWTManager.get_token_info(token)
-    username = result["username"]
+    login = result["login"]
 
-    return render_template('index.html', login=username)
+    return render_template('index.html', login=login)
 
 
 @current_app.route('/profile/<login>', methods=['GET'])
@@ -55,7 +78,7 @@ def login():
             user_id = db_manager.loginUser(login, password)
 
             if user_id:
-                token = JWTManager.generate_token(user_id=user_id, username=login)
+                token = JWTManager.generate_token(user_id=user_id, login=login)
 
                 response = make_response(
                     jsonify({"message": "Login successful"})
@@ -138,7 +161,8 @@ def statistics_data():
         return redirect(url_for('login'))
     db_manager = DataBaseManager()
 
-    login = "test"
+    result = JWTManager.get_token_info(token)
+    login = result["login"]
 
     statistics_data =  db_manager.get_statistics(login)
     return jsonify(statistics_data), 200
@@ -152,7 +176,9 @@ def send_statistic():
 
     db_manager = DataBaseManager()
 
-    login = "test"
+    result = JWTManager.get_token_info(token)
+    login = result["login"]
+
     data = request.get_json()
     chars = data.get('chars')
     typing_speed = data.get('typing_speed')
@@ -170,8 +196,8 @@ def statistics_clear():
 
     db_manager = DataBaseManager()
 
-
-    login = "test"
+    result = JWTManager.get_token_info(token)
+    login = result["login"]
 
     message = db_manager.statistics_clear(login)
     return message, 200

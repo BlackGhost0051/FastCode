@@ -134,6 +134,11 @@ class DataBaseManager:
         finally:
             connect.close()
 
+    def isAdmin(self, login: str) -> bool:
+        print("DataBaseManager | ",login, " | IsAdmin")
+        return False
+
+
 
     # SQL Injection
     # def loginUser(self, login: str, password: str) -> bool:

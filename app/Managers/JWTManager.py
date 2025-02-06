@@ -6,11 +6,11 @@ from config import Config
 
 class JWTManager:
     @staticmethod
-    def generate_token(user_id, username, expires_in=3600):
+    def generate_token(user_id, login, expires_in=3600):
         try:
             payload = {
                 "user_id": user_id,
-                "username": username,
+                "login": login,
                 "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=expires_in),
                 "iat": datetime.datetime.utcnow()
             }
