@@ -4,6 +4,7 @@ from flask import render_template, current_app, jsonify, request, Response, make
 
 from app.Managers.DataBaseManager import DataBaseManager
 from app.Managers.JWTManager import JWTManager
+from app.Managers.LanguagesManager import LanguagesManager
 
 EXTENSIONS_PATH = {
     '.py': 'python',
@@ -41,7 +42,7 @@ def admin():
 
 @current_app.route('/')
 def home():
-    # languagesManager = LanguagesManager()
+    languagesManager = LanguagesManager()
     token = request.cookies.get('token')
     if not JWTManager.verify_token(token):
         return redirect(url_for('login'))
