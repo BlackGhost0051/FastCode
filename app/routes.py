@@ -1,5 +1,5 @@
 import os
-from flask import render_template, current_app, jsonify, request, Response, session, make_response, url_for, redirect, \
+from flask import render_template, current_app, jsonify, request, Response, make_response, url_for, redirect, \
     send_from_directory
 
 from app.Managers.DataBaseManager import DataBaseManager
@@ -33,9 +33,8 @@ def admin():
     login = result["login"]
 
     database_manager = DataBaseManager()
-    isAdmin = database_manager.isAdmin(login)
 
-    if not isAdmin:
+    if not database_manager.isAdmin(login):
         return page_not_found(401)
 
     return "Admin page"
