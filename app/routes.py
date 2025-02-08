@@ -40,6 +40,11 @@ def admin():
 
     return "Admin page"
 
+@current_app.route('/delete_user')
+def delete_user():
+    pass
+
+
 @current_app.route('/')
 def home():
     languagesManager = LanguagesManager()
