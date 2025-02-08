@@ -136,6 +136,12 @@ class DataBaseManager:
 
     def isAdmin(self, login: str) -> bool:
         print("DataBaseManager | ",login, " | IsAdmin")
+
+        connect = sqlite3.connect(self.db_path)
+        cursor = connect.cursor()
+        cursor.execute('')
+        connect.commit()
+
         return False
 
 
