@@ -23,8 +23,7 @@ login_button.addEventListener("click", () => {
     .then((response) => { 
         if (!response.ok){
             console.error(`HTTP error! Status: ${response.status}`);
-        } else{
-
+            alert(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
     })
