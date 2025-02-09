@@ -74,36 +74,57 @@ FasrCode/
 ```
 
 
-## How add a new language
+[//]: # (## How add a new language)
 
-### Make language dir
+[//]: # ()
+[//]: # (### Make language dir)
 
-`
-app/static/languages
-`
+[//]: # ()
+[//]: # (`)
 
-### Modify EXTENSIONS_PATH
-Add your language
+[//]: # (app/static/languages)
 
-`
-app/routes.py
-`
+[//]: # (`)
 
-```python
-EXTENSIONS_PATH = {
-    '.py': 'python',
-    '.java': 'java',
-    '.c': 'c'
-}
-```
+[//]: # ()
+[//]: # (### Modify EXTENSIONS_PATH)
 
-### Add logo
+[//]: # (Add your language)
 
-language + _logo.svg
+[//]: # ()
+[//]: # (`)
 
-`
-app/static/logo
-`
+[//]: # (app/routes.py)
+
+[//]: # (`)
+
+[//]: # ()
+[//]: # (```python)
+
+[//]: # (EXTENSIONS_PATH = {)
+
+[//]: # (    '.py': 'python',)
+
+[//]: # (    '.java': 'java',)
+
+[//]: # (    '.c': 'c')
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Add logo)
+
+[//]: # ()
+[//]: # (language + _logo.svg)
+
+[//]: # ()
+[//]: # (`)
+
+[//]: # (app/static/logo)
+
+[//]: # (`)
 
 ## Statistic
 chart.js
