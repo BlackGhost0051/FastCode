@@ -23,6 +23,9 @@ class LanguagesManager:
 
     # verify languages folders by list
 
+    def get_extensions_path(self):
+        return EXTENSIONS_PATH
+
     def create_language_folder(self):
         pass
 
