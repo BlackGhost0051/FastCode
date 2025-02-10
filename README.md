@@ -74,7 +74,7 @@ FasrCode/
 ```
 
 
-[//]: # (## How add a new language)
+## How add a new language
 
 [//]: # ()
 [//]: # (### Make language dir)
