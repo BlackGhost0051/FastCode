@@ -69,8 +69,8 @@ class LanguagesManager:
             try:
                 with open(file_path, 'r') as file:
                     code = file.read()
-                pass
+                return code
             except Exception as e:
-                pass
+                return False
         else:
-            pass
+            return False
