@@ -26,8 +26,6 @@ class LanguagesManager:
     def get_extensions_path(self):
         return EXTENSIONS_PATH
 
-    def create_language_folder(self):
-        pass
 
     def verify_file(self, filename):
         pass
