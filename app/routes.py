@@ -22,7 +22,9 @@ def page_not_found(e):
 @current_app.route('/robots.txt')
 def robots():
     return send_from_directory('static', 'robots.txt', mimetype='text/plain')
-
+@current_app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/x-icon')
 @current_app.route('/admin')
 def admin():
     token = request.cookies.get('token')
